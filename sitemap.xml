@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>/2018/04/21/It-i-never-too-late-to-be-what-you-might-have-been/</loc>
-<lastmod>2018-04-21T21:01:35+09:00</lastmod>
-</url>
-<url>
 <loc>/2018/04/24/Strive-not-to-be-a-success-but-rather-to-be-of-value/</loc>
 <lastmod>2018-04-24T21:01:35+09:00</lastmod>
 </url>
@@ -53,6 +49,10 @@
 <lastmod>2018-11-13T21:01:35+09:00</lastmod>
 </url>
 <url>
+<loc>/2023/04/21/It-i-never-too-late-to-be-what-you-might-have-been/</loc>
+<lastmod>2023-04-21T00:00:00+09:00</lastmod>
+</url>
+<url>
 <loc>/about/</loc>
 </url>
 <url>
@@ -60,18 +60,6 @@
 </url>
 <url>
 <loc>/</loc>
-</url>
-<url>
-<loc>/styleguide/</loc>
-</url>
-<url>
-<loc>/tag/lifestyle/</loc>
-</url>
-<url>
-<loc>/tag/rest/</loc>
-</url>
-<url>
-<loc>/tag/nature/</loc>
 </url>
 <url>
 <loc>/tag/work/</loc>
@@ -89,10 +77,19 @@
 <loc>/tag/life/</loc>
 </url>
 <url>
+<loc>/tag/rest/</loc>
+</url>
+<url>
 <loc>/tag/notes/</loc>
 </url>
 <url>
 <loc>/tag/travels/</loc>
+</url>
+<url>
+<loc>/tag/lifestyle/</loc>
+</url>
+<url>
+<loc>/tag/nature/</loc>
 </url>
 <url>
 <loc>/tag/business/</loc>
