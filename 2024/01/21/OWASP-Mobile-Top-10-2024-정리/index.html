@@ -6,10 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>LRTK</title>
-  <meta name='description' content='A blog where I share my personal learnings and experiences in information security'>
+  <title>OWASP Mobile Top 10 2024 정리</title>
+  <meta name='description' content='2024년 OWASP Mobile Top 10의 주요 보안 위협을 간략히 소개합니다. 모바일 앱 개발자와 보안 전문가를 위한 이 리스트는 현재 중요한 보안 위협 10가지와 기본 대응 방법을 다룹니다. 짧고...'>
 
-  <link rel="canonical" href="/">
+  <link rel="canonical" href="/2024/01/21/OWASP-Mobile-Top-10-2024-%EC%A0%95%EB%A6%AC/">
   <link rel="alternate" type="application/rss+xml" title="LRTK" href="/feed.xml">
 
   <!-- Fonts -->
@@ -43,7 +43,7 @@
   
 
 <!-- begin header -->
-<header class="header header--top">
+<header class="header ">
   <div class="container">
     <div class="row">
       <div class="header__inner col col-12">
@@ -223,106 +223,367 @@
 
   <!-- begin content -->
   <main class="content" aria-label="Content">
-    <!-- begin hero -->
-
-<section class="hero">
-  <div class="hero__inner">
-    <div class="hero__image">
-      <img class="lazy" data-src="/images/01.jpg" alt="LRTK">
-    </div>
-    <div class="hero__content">
-      <h1 class="hero__title">LRTK</h1>
-      <p class="hero__desc">A blog where I share my personal learnings and experiences in information security</p>
+    <div class="post-head">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col col-6 col-t-12">
+        <div class="image-box">
+          <img class="post-image lazy" data-src="/images/20.jpg" alt="OWASP Mobile Top 10 2024 정리">
+        </div>
+      </div>
+      
+  
+      <div class="col col-6 col-t-12">
+        <div class="post-head__box">
+        
+          <div class="post__meta">
+            <span class="post__minutes">
+              
+              
+                3 min read
+              
+              <time class="post__date"
+                datetime="2024-01-21T01:50:00+09:00">2024-01-21 01:50</time>
+            </span>
+          </div>
+        
+          <h2 class="post__title">OWASP Mobile Top 10 2024 정리</h2>
+        
+          <div class="post__bottom">
+        
+            <div class="post__author">
+              <a href="/about/" aria-label="LRTK"><img class="post__author-image"
+                  src="/images/author.jpeg" alt="LRTK's Picture"></a>
+            </div>
+        
+            <div class="post__bottom-meta">
+              <a href="/about/" class="post__author-link">LRTK</a>
+              
+              <span>in</span>
+              <span class="post-tags">
+                
+                <a href="/tag/Mobile" class="post__tag">Mobile</a>
+                
+                <a href="/tag/iOS" class="post__tag">iOS</a>
+                
+                <a href="/tag/AOS" class="post__tag">AOS</a>
+                
+              </span>
+              
+            </div>
+          </div>
+        
+        </div>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- begin hero -->
+<!-- begin post -->
+<div class="container">
+  <article class="post animate">
+
+    <div class="post__content">
+      <p>2024년 OWASP Mobile Top 10의 주요 보안 위협을 간략히 소개합니다. 모바일 앱 개발자와 보안 전문가를 위한 이 리스트는 현재 중요한 보안 위협 10가지와 기본 대응 방법을 다룹니다. 짧고 핵심적인 내용으로 모바일 앱 보안의 중요 포인트를 파악해보세요.</p>
+
+<h2 id="list-of-top-10">List of Top 10</h2>
+
+<h3 id="m1-부적절한-자격-증명-사용improper-credential-usage"><a href="https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage.html">M1. 부적절한 자격 증명 사용(Improper Credential Usage)</a></h3>
+<h4 id="위협-주체---어플리케이션">위협 주체 - 어플리케이션</h4>
+<p>공개적으로 이용 가능하거나 맞춤 제작된 도구를 사용하는 자동화된 공격자들은 하드코드된 자격 증명을 찾아내어 이용하거나 부적절한 자격 증명 사용의 약점을 악용할 수 있습니다.
+<br />
+<br /></p>
+
+<h4 id="공격-백터---이용-가능성-쉬움">공격 백터 - 이용 가능성 쉬움</h4>
+<p>공격자들은 하드코드된 자격 증명이나 부적절하게 관리된 자격 증명의 취약점을 이용하여 모바일 앱의 민감한 기능에 무단으로 접근하거나 합법적인 접근을 우회할 수 있습니다.
+<br />
+<br /></p>
+
+<h4 id="보안-약점---흔한-케이스-탐지-쉬움">보안 약점 - 흔한 케이스, 탐지 쉬움</h4>
+<p>하드코드된 자격 증명과 부적절한 자격 증명 관리는 흔하며 쉽게 탐지될 수 있는 보안 약점입니다.
+<br />
+<br /></p>
+
+<h4 id="기술적-영향---심각">기술적 영향 - 심각</h4>
+<p>부적절한 자격 증명 관리는 민감한 정보의 유출, 사용자 프라이버시 손실, 사기 행위, 관리 기능의 무단 접근과 같은 심각한 기술적 영향을 초래할 수 있습니다.
+<br />
+<br /></p>
+
+<h4 id="사업적-영향---심각">사업적 영향 - 심각</h4>
+<p>하드코드된 자격 증명과 부적절한 자격 증명 사용은 명성 훼손, 정보 도난, 사기, 데이터 무단 접근 등의 심각한 비즈니스 영향을 끼칠 수 있습니다.
+<br />
+<br /></p>
+
+<h4 id="예방-방법">예방 방법</h4>
+<ol>
+  <li>
+    <p>하드코드된 자격 증명 사용 피하기<br />
+모바일 앱의 코드나 구성 파일 내에 하드코드된 자격 증명을 사용하는 것은 피해야 합니다. 이러한 자격 증명은 공격자에게 쉽게 발견될 수 있으며, 무단 접근의 경로를 제공할 수 있습니다.</p>
+  </li>
+  <li>
+    <p>안전한 자격 증명 전송 및 저장<br />
+사용자의 자격 증명은 전송과 저장 과정에서 항상 암호화되어야 합니다. 민감한 자격 증명 데이터를 암호화되지 않은 상태로 전송하거나 저장하는 것은 보안 취약점을 초래할 수 있습니다.</p>
+  </li>
+  <li>
+    <p>강력한 사용자 인증 프로토콜 구현<br />
+사용자 인증 절차는 강력하고 안전한 프로토콜을 사용하여 구현해야 합니다. 예를 들어, 다중 요소 인증(Multi-Factor Authentication, MFA)을 도입하면 보안 수준을 높일 수 있습니다.</p>
+  </li>
+  <li>
+    <p>API 키와 토큰의 정기적인 업데이트와 교체<br />
+사용되는 API 키나 토큰은 정기적으로 업데이트하고 교체하여 보안을 강화해야 합니다. 이는 무단 접근으로부터 보호하는 데 도움이 됩니다.</p>
+  </li>
+  <li>
+    <p>보안 감사 및 코드 검토<br />
+개발 과정에서 정기적인 보안 감사와 코드 검토를 실시하여 하드코드된 자격 증명이나 취약한 자격 증명 관리 관행이 없는지 확인해야 합니다.</p>
+  </li>
+  <li>
+    <p>보안 교육 및 인식 제고<br />
+개발 팀에게 보안에 대한 교육과 인식을 제고하여, 보안을 우선시하는 개발 문화를 조성하는 것이 중요합니다. 개발자들이 보안에 대해 잘 알고 있으면, 자격 증명 관련 취약점을 예방하는 데 도움이 됩니다.</p>
+  </li>
+</ol>
+
+<h4 id="공격-시나리오-예시">공격 시나리오 예시</h4>
+<ul>
+  <li>하드코드된 자격 증명 발견 및 악용</li>
+  <li>불안전한 자격 증명 전송</li>
+  <li>저장된 자격 증명의 무단 사용</li>
+</ul>
+
+<hr />
+
+<h3 id="m2-inadequate-supply-chain-security"><a href="https://owasp.org/www-project-mobile-top-10/2023-risks/m2-inadequate-supply-chain-security.html">M2. Inadequate Supply Chain Security</a></h3>
+<h4 id="위협-주체">위협 주체</h4>
+
+<h4 id="공격-백터">공격 백터</h4>
+
+<h4 id="보안-약점">보안 약점</h4>
+
+<h4 id="기술적-영향">기술적 영향</h4>
+
+<h4 id="사업적-영향">사업적 영향</h4>
+
+<h4 id="예방-방법-1">예방 방법</h4>
+
+<h4 id="공격-시나리오-예시-1">공격 시나리오 예시</h4>
+
+<h3 id="m3-insecure-authenticationauthorization"><a href="https://owasp.org/www-project-mobile-top-10/2023-risks/m3-insecure-authentication-authorization.html">M3. Insecure Authentication/Authorization</a></h3>
+<h4 id="위협-주체-1">위협 주체</h4>
+
+<h4 id="공격-백터-1">공격 백터</h4>
+
+<h4 id="보안-약점-1">보안 약점</h4>
+
+<h4 id="기술적-영향-1">기술적 영향</h4>
+
+<h4 id="사업적-영향-1">사업적 영향</h4>
+
+<h4 id="예방-방법-2">예방 방법</h4>
+
+<h4 id="공격-시나리오-예시-2">공격 시나리오 예시</h4>
+
+<h3 id="m4-insufficient-inputoutput-validation"><a href="https://owasp.org/www-project-mobile-top-10/2023-risks/m4-insufficient-input-output-validation.html">M4. Insufficient Input/Output Validation</a></h3>
+<h4 id="위협-주체-2">위협 주체</h4>
+
+<h4 id="공격-백터-2">공격 백터</h4>
+
+<h4 id="보안-약점-2">보안 약점</h4>
+
+<h4 id="기술적-영향-2">기술적 영향</h4>
+
+<h4 id="사업적-영향-2">사업적 영향</h4>
+
+<h4 id="예방-방법-3">예방 방법</h4>
+
+<h4 id="공격-시나리오-예시-3">공격 시나리오 예시</h4>
+
+<h3 id="m5-insecure-communication"><a href="https://owasp.org/www-project-mobile-top-10/2023-risks/m5-insecure-communication.html">M5. Insecure Communication</a></h3>
+<h4 id="위협-주체-3">위협 주체</h4>
+
+<h4 id="공격-백터-3">공격 백터</h4>
+
+<h4 id="보안-약점-3">보안 약점</h4>
+
+<h4 id="기술적-영향-3">기술적 영향</h4>
+
+<h4 id="사업적-영향-3">사업적 영향</h4>
+
+<h4 id="예방-방법-4">예방 방법</h4>
+
+<h4 id="공격-시나리오-예시-4">공격 시나리오 예시</h4>
+
+<h3 id="m6-inadequate-privacy-controls"><a href="https://owasp.org/www-project-mobile-top-10/2023-risks/m6-inadequate-privacy-controls.html">M6. Inadequate Privacy Controls</a></h3>
+<h4 id="위협-주체-4">위협 주체</h4>
+
+<h4 id="공격-백터-4">공격 백터</h4>
+
+<h4 id="보안-약점-4">보안 약점</h4>
+
+<h4 id="기술적-영향-4">기술적 영향</h4>
+
+<h4 id="사업적-영향-4">사업적 영향</h4>
+
+<h4 id="예방-방법-5">예방 방법</h4>
+
+<h4 id="공격-시나리오-예시-5">공격 시나리오 예시</h4>
+
+<h3 id="m7-insufficient-binary-protections"><a href="https://owasp.org/www-project-mobile-top-10/2023-risks/m7-insufficient-binary-protection.html">M7. Insufficient Binary Protections</a></h3>
+<h4 id="위협-주체-5">위협 주체</h4>
+
+<h4 id="공격-백터-5">공격 백터</h4>
+
+<h4 id="보안-약점-5">보안 약점</h4>
+
+<h4 id="기술적-영향-5">기술적 영향</h4>
+
+<h4 id="사업적-영향-5">사업적 영향</h4>
+
+<h4 id="예방-방법-6">예방 방법</h4>
+
+<h4 id="공격-시나리오-예시-6">공격 시나리오 예시</h4>
+
+<h3 id="m8-security-misconfiguration"><a href="https://owasp.org/www-project-mobile-top-10/2023-risks/m8-security-misconfiguration.html">M8. Security Misconfiguration</a></h3>
+<h4 id="위협-주체-6">위협 주체</h4>
+
+<h4 id="공격-백터-6">공격 백터</h4>
+
+<h4 id="보안-약점-6">보안 약점</h4>
+
+<h4 id="기술적-영향-6">기술적 영향</h4>
+
+<h4 id="사업적-영향-6">사업적 영향</h4>
+
+<h4 id="예방-방법-7">예방 방법</h4>
+
+<h4 id="공격-시나리오-예시-7">공격 시나리오 예시</h4>
+
+<h3 id="m9-insecure-data-storage"><a href="https://owasp.org/www-project-mobile-top-10/2023-risks/m9-insecure-data-storage.html">M9. Insecure Data Storage</a></h3>
+<h4 id="위협-주체-7">위협 주체</h4>
+
+<h4 id="공격-백터-7">공격 백터</h4>
+
+<h4 id="보안-약점-7">보안 약점</h4>
+
+<h4 id="기술적-영향-7">기술적 영향</h4>
+
+<h4 id="사업적-영향-7">사업적 영향</h4>
+
+<h4 id="예방-방법-8">예방 방법</h4>
+
+<h4 id="공격-시나리오-예시-8">공격 시나리오 예시</h4>
+
+<h3 id="m10-insufficient-cryptography"><a href="https://owasp.org/www-project-mobile-top-10/2023-risks/m10-insufficient-cryptography.html">M10. Insufficient Cryptography</a></h3>
+<h4 id="위협-주체-8">위협 주체</h4>
+
+<h4 id="공격-백터-8">공격 백터</h4>
+
+<h4 id="보안-약점-8">보안 약점</h4>
+
+<h4 id="기술적-영향-8">기술적 영향</h4>
+
+<h4 id="사업적-영향-8">사업적 영향</h4>
+
+<h4 id="예방-방법-9">예방 방법</h4>
+
+<h4 id="공격-시나리오-예시-9">공격 시나리오 예시</h4>
+
+<h2 id="2016-vs-2024">2016 vs 2024</h2>
+<p>![[Pasted image 20240121020603.png]]</p>
+
+    </div>
+
+    <div class="post__share">
+      <div class="share__list">
+        <a class="share__link share__facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2024/01/21/OWASP-Mobile-Top-10-2024-%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5/" onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+
+        <a class="share__link share__twitter" href="https://twitter.com/intent/tweet?text=OWASP%20Mobile%20Top%2010%202024%20%EC%A0%95%EB%A6%AC&url=/2024/01/21/OWASP-Mobile-Top-10-2024-%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5/" onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+
+        <a class="share__link share__pinterest" href="http://pinterest.com/pin/create/button/?url=/2024/01/21/OWASP-Mobile-Top-10-2024-%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5/&amp;media=/images/20.jpg&amp;description=OWASP%20Mobile%20Top%2010%202024%20%EC%A0%95%EB%A6%AC" onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+      </div>
+    </div>
+
+    <div class="post__navigation">
+      
+      
+    </div>
+
+  </article>
+</div>
+<!-- end post -->
 
 
 
 
 
+
+
+<div class="container">
+  <div class="related-posts ">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <h3 class="related-title">You may also like</h3>
+          <div class="row grid">
+
+          
+            
+            
+
+            
+
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <!-- begin comments -->
 <div class="container">
   <div class="row">
     <div class="col col-12">
-      <div class="container__inner">
-        <div class="row grid">
-          
-            
-              <div class="article col col-6 col-t-12 grid__post animate article--big">
-  <div class="article__inner">
-
-    
-    <a class="article__image" href="/2024/01/21/OWASP-Mobile-Top-10-2024-%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5/">
-      <img class="lazy" data-src="/images/20.jpg" alt="OWASP Mobile Top 10 2024 정리">
-    </a>
-    
-
-    <div class="article__content">
-
-      <div class="article__meta">
-        <span class="article__minutes">
-          
-            
-              3 min read
-          
-          <time class="article__date" datetime="2024-01-21T01:50:00+09:00">2024-01-21 01:50</time>
-        </span>
-      </div>
-
-      <h2 class="article__title">OWASP Mobile Top 10 2024 정리</h2>
-
-      <p class="article__excerpt">2024년 OWASP Mobile Top 10의 주요 보안 위협을 간략히 소개합니다. 모바일 앱 개발자와 보안 전문가를 위한 이 리스트는 현재 중요한 보안 위협 10가지와 기본 대응 방법을 다룹니다. 짧고...</p>
-
-      <div class="article__bottom">
-
-        
-        <div class="article__author">
-          <a href="/about/" aria-label="LRTK"><img class="article__author-image lazy" data-src="/images/author.jpeg" alt="LRTK's Picture"></a>
-        </div>
-        
-
-        <div class="article__bottom-meta">
-          
-            <a href="/about/" class="article__author-link">LRTK</a>
-          
-          
-            <span>in</span>
-            <span class="article-tags">
-              
-                <a href="/tag/Mobile" class="article__tag">Mobile</a>
-              
-                <a href="/tag/iOS" class="article__tag">iOS</a>
-              
-                <a href="/tag/AOS" class="article__tag">AOS</a>
-              
-            </span>
-          
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</div>
-            
-          
+      <div class="disqus-inner">
+        <div id="disqus_thread" class="post-comments">
+          <div id="disqus_empty"></div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col col-12 load-more">
-      
-      
-      
-    </div>
-  </div>
-</div>
+<script>
+  function load_disqus() {
+    var disqus_shortname = 'lrtk-1',
+      is_disqus_empty = document.getElementById('disqus_empty'),
+      disqus_target = document.getElementById('disqus_thread'),
+      disqus_embed = document.createElement('script'),
+      disqus_hook = (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]);
+
+    if (disqus_target && is_disqus_empty) {
+      disqus_embed.type = 'text/javascript';
+      disqus_embed.async = true;
+      disqus_embed.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      disqus_hook.appendChild(disqus_embed);
+      is_disqus_empty.remove();
+    }
+  }
+
+  window.addEventListener('scroll', function (e) {
+    var currentScroll = document.scrollingElement.scrollTop;
+    var disqus_target = document.getElementById('disqus_thread');
+
+    if (disqus_target && (currentScroll > disqus_target.getBoundingClientRect().top - 150)) {
+      load_disqus('disqus_shortname');
+    }
+  }, false);
+
+</script>
+<noscript>Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<!-- end comments --> 
   </main> 
   <!-- end content -->
   
@@ -444,7 +705,7 @@
   var base_url = "",
     pagination_next_url = base_url + '/page2',
     pagination_next_page_number = '',
-    pagination_available_pages_number = '1';
+    pagination_available_pages_number = '';
 </script>
 </body>
 
