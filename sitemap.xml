@@ -22,9 +22,15 @@
 <loc>/</loc>
 </url>
 <url>
+<loc>/tag/korean/</loc>
+</url>
+<url>
 <loc>/tag/web/</loc>
 </url>
 <url>
 <loc>/tag/jwt/</loc>
+</url>
+<url>
+<loc>/tag/english/</loc>
 </url>
 </urlset>
