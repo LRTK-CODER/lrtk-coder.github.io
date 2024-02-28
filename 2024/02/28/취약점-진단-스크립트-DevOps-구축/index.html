@@ -356,33 +356,33 @@
 <h1 id="구축">구축</h1>
 
 <h2 id="1-docker-구축">1. Docker 구축</h2>
-<p>Ubuntu 서버에 Docker를 설치합니다. Docker는 컨테이너화된 애플리케이션을 실행하는 데 사용됩니다.</p>
+<p>Ubuntu 서버에 Docker를 설치합니다. Docker는 컨테이너화된 애플리케이션을 실행하는 데 사용됩니다.<br /></p>
 
 <p>먼저, 패키지 목록을 최신 상태로 업데이트하고 필요한 패키지들을 설치합니다.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update
 <span class="nb">sudo </span>apt <span class="nb">install </span>apt-transport-https ca-certificates curl software-properties-common
 </code></pre></div></div>
-
-<p>Docker의 공식 GPG 키를 시스템에 추가합니다. 이는 Docker 패키지의 무결성을 검증하는 데 사용됩니다.</p>
+<p><br />
+Docker의 공식 GPG 키를 시스템에 추가합니다. 이는 Docker 패키지의 무결성을 검증하는 데 사용됩니다.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-fsSL</span> https://download.docker.com/linux/ubuntu/gpg | <span class="nb">sudo </span>apt-key add -
 </code></pre></div></div>
-
-<p>Docker의 공식 APT 리포지토리를 시스템의 소스 리스트에 추가합니다.</p>
+<p><br />
+Docker의 공식 APT 리포지토리를 시스템의 소스 리스트에 추가합니다.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository <span class="s2">"deb [arch=amd64] https://download.docker.com/linux/ubuntu </span><span class="si">$(</span>lsb_release <span class="nt">-cs</span><span class="si">)</span><span class="s2"> stable"</span>
 </code></pre></div></div>
-
-<p>패키지 목록을 다시 업데이트하고 Docker CE(Community Edition)를 설치합니다.</p>
+<p><br />
+패키지 목록을 다시 업데이트하고 Docker CE(Community Edition)를 설치합니다.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update
 <span class="nb">sudo </span>apt <span class="nb">install</span> <span class="nt">-y</span> docker-ce docker-compose
 </code></pre></div></div>
-
-<p>Docker 서비스를 시작하고, <code class="language-plaintext highlighter-rouge">docker</code> 명령어를 <code class="language-plaintext highlighter-rouge">sudo</code> 없이 사용할 수 있도록 사용자를 <code class="language-plaintext highlighter-rouge">docker</code> 그룹에 추가합니다.</p>
+<p><br />
+Docker 서비스를 시작하고, <code class="language-plaintext highlighter-rouge">docker</code> 명령어를 <code class="language-plaintext highlighter-rouge">sudo</code> 없이 사용할 수 있도록 사용자를 <code class="language-plaintext highlighter-rouge">docker</code> 그룹에 추가합니다.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl start docker
 <span class="nb">sudo </span>systemctl <span class="nb">enable </span>docker
 <span class="nb">sudo </span>usermod <span class="nt">-aG</span> docker <span class="k">${</span><span class="nv">USER</span><span class="k">}</span>
 </code></pre></div></div>
-
-<p>사용자를 <code class="language-plaintext highlighter-rouge">docker</code> 그룹에 추가한 후에는, 변경 사항을 적용하기 위해 로그아웃하고 다시 로그인해야 할 수도 있습니다.
+<p><br />
+사용자를 <code class="language-plaintext highlighter-rouge">docker</code> 그룹에 추가한 후에는, 변경 사항을 적용하기 위해 로그아웃하고 다시 로그인해야 할 수도 있습니다.
 <br /><br /></p>
 
 <h2 id="2-docker-compose-파일-생성">2. Docker Compose 파일 생성</h2>
@@ -470,28 +470,24 @@ GitLab 서비스를 중지하고 컨테이너를 제거하려면 다음 명령�
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker exec -it &lt;Gitlab 컨테이너 이름&gt; /bin/bash cat /etc/gitlab/initial_root_password | grep Password:
 </code></pre></div></div>
-<p><br /></p>
-
-<p>Docker를 사용하는 경우, GitLab 컨테이너에 접속합니다.</p>
+<p><br />
+Docker를 사용하는 경우, GitLab 컨테이너에 접속합니다.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> gitlab bash
 </code></pre></div></div>
-<p><br /></p>
-
-<p>GitLab 컨테이너 내부에서 GitLab 콘솔을 실행합니다.</p>
+<p><br />
+GitLab 컨테이너 내부에서 GitLab 콘솔을 실행합니다.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gitlab-rails console
 </code></pre></div></div>
-<p><br /></p>
-
-<p>GitLab 콘솔에서 다음 명령어를 실행하여 관리자 비밀번호를 재설정합니다. 여기서 <code class="language-plaintext highlighter-rouge">your-new-password</code>는 원하는 새 비밀번호로 대체합니다.</p>
+<p><br />
+GitLab 콘솔에서 다음 명령어를 실행하여 관리자 비밀번호를 재설정합니다. 여기서 <code class="language-plaintext highlighter-rouge">your-new-password</code>는 원하는 새 비밀번호로 대체합니다.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user <span class="o">=</span> User.where<span class="o">(</span><span class="nb">id</span>: 1<span class="o">)</span>.first
 user.password <span class="o">=</span> <span class="s1">'your-new-password'</span>
 user.password_confirmation <span class="o">=</span> <span class="s1">'your-new-password'</span>
 user.save!
 <span class="nb">exit</span>
 </code></pre></div></div>
-<p><br /></p>
-
-<p>변경 사항을 적용하기 위해 GitLab 서비스를 재설정 및 재시작할 수 있습니다.</p>
+<p><br />
+변경 사항을 적용하기 위해 GitLab 서비스를 재설정 및 재시작할 수 있습니다.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gitlab-ctl reconfigure
 gitlab-ctl restart
 </code></pre></div></div>
@@ -508,7 +504,8 @@ gitlab-ctl restart
 <img src="https://i.imgur.com/hqq0IxQ.png" alt="" /></p>
 
 <p>주의할 점은 root 경로를 기입해줘야 404 상태코드가 발생이 안된다는 것이다.<br />
-ex) http://192.168.0.35:8080 - X, http://192.168.0.35:8080/ - O</p>
+ex) http://192.168.0.35:8080 - X, http://192.168.0.35:8080/ - O
+<br /><br /></p>
 
 <h2 id="2-컨테이너-레지스트리-활성화">2. 컨테이너 레지스트리 활성화</h2>
 <p>나의 목표는 진단 스크립트 환경을 컨테이너로 돌릴 수 있다면, 돌리고 할 수 없다면 서버 구축 후 SSH으로 CI를 구축하는 것이다. 이를 위해 커스텀 컨테이너 이미지를 직접 생성해야하고, 생성한 이미지를 저장소에 저장을 해야한다.<br />
@@ -534,7 +531,7 @@ gitlab-ctl restart
 <img src="https://i.imgur.com/kIXVC0Y.png" alt="" />
 만약 메뉴가 존재하지 않는다면, 설정이 먹히지 않았다는 것이다. 이럴 땐, registry 컨테이너가 동작하고 있는지와 에러 로그를 확인하여 문제점을 해결하면 된다.</p>
 
-<p>이미지를 푸시하고 풀하는 방법은 다음과 같습니다</p>
+<p>이미지를 푸시하고 풀하는 방법은 다음과 같습니다.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 로그인</span>
 docker login &lt;호스트 IP 주소&gt;:5000
 
@@ -614,24 +611,20 @@ Push가 무사히 완료가 되면, 위 사진처럼 컨테이너 이미지가 �
 <p>변경 사항을 적용하기 위해 현재 실행 중인 서비스를 중지합니다</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose down
 </code></pre></div></div>
-<p><br /></p>
-
-<p>변경된 <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> 파일을 사용하여 모든 서비스를 다시 시작합니다</p>
+<p><br />
+변경된 <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> 파일을 사용하여 모든 서비스를 다시 시작합니다</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up <span class="nt">-d</span>
 </code></pre></div></div>
-<p><br /></p>
-
-<p>Gitlab에 관리자로 로그인 후 <code class="language-plaintext highlighter-rouge">Admin Area &gt; CI/CD &gt; Runners</code>에서 Runner 토큰 확인
+<p><br />
+Gitlab에 관리자로 로그인 후 <code class="language-plaintext highlighter-rouge">Admin Area &gt; CI/CD &gt; Runners</code>에서 Runner 토큰 확인
 <img src="https://i.imgur.com/wa6Tlaf.png" alt="" />
-<br /></p>
-
-<p>Gitlab Runner 컨테이너에 접근하여, Runner를 등록합니다.</p>
+<br />
+Gitlab Runner 컨테이너에 접근하여, Runner를 등록합니다.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> gitlab-runner bash
 gitlab-runner register
 </code></pre></div></div>
-<p><br /></p>
-
-<p>등록 시 물어보는 항목은 아래와 같음</p>
+<p><br />
+등록 시 물어보는 항목은 아래와 같음</p>
 <ul>
   <li>GitLab 인스턴스 URL (<code class="language-plaintext highlighter-rouge">http://&lt;gitlab-host&gt;:&lt;gitlab-port&gt;</code>).</li>
   <li>위에서 얻은 Registration Token.</li>
@@ -642,9 +635,8 @@ gitlab-runner register
 
 <p><code class="language-plaintext highlighter-rouge">Executor</code> 선택은 현재 도커 컨테이너로 구축하는 중이라서 Docker로 선택하였습니다.
 만약 VM이라던가, 다른 서버로 연결하여 한다면 SSH로 선택하여 Runner를 추가하면 됩니다.
-<br /></p>
-
-<p>등록에 성공하면, Runners에 등록된 인스턴스가 보이게 됩니다.
+<br />
+등록에 성공하면, Runners에 등록된 인스턴스가 보이게 됩니다.
 <img src="https://i.imgur.com/Xlf36Ax.png" alt="" />
 <br /><br /></p>
 
@@ -654,16 +646,14 @@ gitlab-runner register
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> gitlab bash
 <span class="nv">$ </span>gitlab-backup create
 </code></pre></div></div>
-<p><br /></p>
-
-<p>GitLab의 모든 중요 데이터(데이터베이스, 업로드된 파일, 리포지토리 등)를 백업합니다. 백업 파일은 <code class="language-plaintext highlighter-rouge">/var/opt/gitlab/backups</code> 디렉토리에 저장됩니다.<br /></p>
+<p><br />
+GitLab의 모든 중요 데이터(데이터베이스, 업로드된 파일, 리포지토리 등)를 백업합니다. 백업 파일은 <code class="language-plaintext highlighter-rouge">/var/opt/gitlab/backups</code> 디렉토리에 저장됩니다.<br /></p>
 
 <p>백업한 데이터를 복구하려면, 백업 파일을 원래의 위치로 복원하고 GitLab을 재시작해야 합니다. GitLab 데이터 복구 명령은 다음과 같습니다.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gitlab-backup restore <span class="nv">BACKUP</span><span class="o">=</span>backup_file_name
 </code></pre></div></div>
-<p><br /></p>
-
-<p>위와 같이 하면 Gitlab 데이터를 백업할 수 있다. <br />
+<p><br />
+위와 같이 하면 Gitlab 데이터를 백업할 수 있다. <br />
 하지만, 주기적으로 백업을 못한다는 점과 gitlab 설정파일은 별도로 저장을 해줘야 한다는 점이 단점이다.<br /></p>
 
 <p>이를 위해서 shell script 파일을 만들어서 Crontab으로 주기적인 백업과 gitlab 설정파일을 백업하도록 하겠다.</p>
@@ -687,9 +677,8 @@ docker <span class="nb">cp</span> <span class="s2">"gitlab:/var/opt/gitlab/backu
 
 <span class="nb">cp</span> <span class="s2">"</span><span class="nv">$GITLAB_CONFIG</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$BACKUP_DIR</span><span class="s2">/gitlab_conf/gitlab_</span><span class="nv">$CURRENT_DATE</span><span class="s2">.rb"</span>
 </code></pre></div></div>
-<p><br /></p>
-
-<p>계속 저장만 하면 용량이 부족할 수 있기 때문에, 90일이 지난 백업 파일은 삭제하도록 하기 위해 Shell Script를 만들었다.</p>
+<p><br />
+계속 저장만 하면 용량이 부족할 수 있기 때문에, 90일이 지난 백업 파일은 삭제하도록 하기 위해 Shell Script를 만들었다.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 <span class="c"># 백업 파일이 저장된 디렉토리</span>
 <span class="nv">BACKUP_DIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/gitlab/backup"</span>
@@ -698,11 +687,9 @@ docker <span class="nb">cp</span> <span class="s2">"gitlab:/var/opt/gitlab/backu
 find <span class="s2">"</span><span class="nv">$BACKUP_DIR</span><span class="s2">/gitlab_conf/"</span> <span class="nt">-type</span> f <span class="nt">-name</span> <span class="s2">"*.rb"</span> <span class="nt">-mtime</span> +90 <span class="nt">-exec</span> <span class="nb">rm</span> <span class="o">{}</span> <span class="se">\;</span>
 find <span class="s2">"</span><span class="nv">$BACKUP_DIR</span><span class="s2">/gitlab_data/"</span> <span class="nt">-type</span> f <span class="nt">-name</span> <span class="s2">"*.tar"</span> <span class="nt">-mtime</span> +90 <span class="nt">-exec</span> <span class="nb">rm</span> <span class="o">{}</span> <span class="se">\;</span>
 </code></pre></div></div>
-<p><br /></p>
-
-<p>이제 해당 스크립트를 일정 주기로 돌릴 Crontab에 설정을 해야한다.<br /></p>
-
-<p>귀찮은 작업이라고 판단되어, 자동 등록 스크립트를 만들었다.</p>
+<p><br />
+이제 해당 스크립트를 일정 주기로 돌릴 Crontab에 설정을 해야한다.<br />
+귀찮은 작업이라고 판단되어, 자동 등록 스크립트를 만들었다.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 <span class="c"># 백업 및 삭제 스크립트 경로</span>
 <span class="nv">BACKUP_DIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/gitlab/backup"</span>
@@ -723,9 +710,8 @@ crontab <span class="nv">$CRON_FILE</span>
 <span class="c"># 임시 파일 삭제</span>
 <span class="nb">rm</span> <span class="nt">-f</span> <span class="nv">$CRON_FILE</span>
 </code></pre></div></div>
-<p><br /></p>
-
-<p>실행 권한을 부여해서 동작시키면 등록이 완료된다.</p>
+<p><br />
+실행 권한을 부여해서 동작시키면 등록이 완료된다.</p>
 
     </div>
 
