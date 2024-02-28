@@ -6,10 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Summary of JWT Vulnerabilities</title>
-  <meta name='description' content='I've briefly summarized the main vulnerabilities of JWT (JSON Web Token), focusing on the security aspects of JWT. This includes unverified signatures, infor...'>
+  <title>취약점 진단 스크립트 DevOps 구축</title>
+  <meta name='description' content='컨설팅 사업을 위한 인프라 취약점 진단 스크립트 구축에 관한 개요를 제공합니다. 복잡한 유지보수 문제를 해결하기 위해 개별 진단 항목을 독립적으로 개발하고, 이를 하나의 통합 스크립트 파일로 배포하는 방안을 제안합니다. 또한, Docker를 활용...'>
 
-  <link rel="canonical" href="/2024/01/26/Summary-of-JWT-Vulnerabilities/">
+  <link rel="canonical" href="/2024/02/28/%EC%B7%A8%EC%95%BD%EC%A0%90-%EC%A7%84%EB%8B%A8-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-DevOps-%EA%B5%AC%EC%B6%95/">
   <link rel="alternate" type="application/rss+xml" title="LRTK" href="/feed.xml">
 
   <!-- Fonts -->
@@ -245,7 +245,7 @@
       
       <div class="col col-6 col-t-12">
         <div class="image-box">
-          <img class="post-image lazy" data-src="/images/Post-01.jpg" alt="Summary of JWT Vulnerabilities">
+          <img class="post-image lazy" data-src="/images/Post-01.jpg" alt="취약점 진단 스크립트 DevOps 구축">
         </div>
       </div>
       
@@ -257,14 +257,14 @@
             <span class="post__minutes">
               
               
-                5 min read
+                13 min read
               
               <time class="post__date"
-                datetime="2024-01-26T21:51:00+09:00">2024-01-26 21:51</time>
+                datetime="2024-02-28T19:50:00+09:00">2024-02-28 19:50</time>
             </span>
           </div>
         
-          <h2 class="post__title">Summary of JWT Vulnerabilities</h2>
+          <h2 class="post__title">취약점 진단 스크립트 DevOps 구축</h2>
         
           <div class="post__bottom">
         
@@ -279,11 +279,9 @@
               <span>in</span>
               <span class="post-tags">
                 
-                <a href="/tag/English" class="post__tag">English</a>
+                <a href="/tag/Korean" class="post__tag">Korean</a>
                 
-                <a href="/tag/Web" class="post__tag">Web</a>
-                
-                <a href="/tag/JWT" class="post__tag">JWT</a>
+                <a href="/tag/DevOps" class="post__tag">DevOps</a>
                 
               </span>
               
@@ -301,114 +299,456 @@
   <article class="post animate">
 
     <div class="post__content">
-      <p>I’ve briefly summarized the main vulnerabilities of JWT (JSON Web Token), focusing on the security aspects of JWT. This includes unverified signatures, information leakage, algorithm manipulation, vulnerabilities related to JWK and JKU, and vulnerabilities in the <code class="language-plaintext highlighter-rouge">kid</code> field.</p>
+      <p>컨설팅 사업을 위한 인프라 취약점 진단 스크립트 구축에 관한 개요를 제공합니다. 복잡한 유지보수 문제를 해결하기 위해 개별 진단 항목을 독립적으로 개발하고, 이를 하나의 통합 스크립트 파일로 배포하는 방안을 제안합니다. 또한, Docker를 활용한 환경 설정, GitLab과 GitLab Runner를 이용한 CI/CD 파이프라인 구축, 컨테이너 레지스트리 활성화 및 GitLab 백업 설정 방법을 상세히 설명합니다.</p>
 
-<h1 id="jwt-concept">JWT Concept</h1>
+<p>아직 미완성된 프로젝트이라 추후에 내용이 크게 수정될 가능성이 있습니다.</p>
 
-<h2 id="what-is-jwt">What is JWT?</h2>
-<p>JWT stands for JSON Web Token. It is a compact and self-contained way to securely transmit small amounts of data as a JSON object, defined by the web standard (RFC 7519).
-✓ Compact: This means that JWT stores information in a relatively small size, making it easy to transmit over networks and include in HTTP headers.
-✓ Self-contained: This indicates that JWT contains all the necessary information within itself.</p>
+<h1 id="개요">개요</h1>
 
-<p>For secure transmission of token information, it is digitally signed. The signature commonly uses various algorithms like HMAC, RSA, etc.</p>
+<p>컨설팅 사업(인프라 진단)에 필요한 취약점 진단 스크립트의 경우, 고객사의 편의를 위해 하나의 스크립트 파일로 제작되고 있습니다.</p>
 
-<h2 id="jwt-structure">JWT Structure</h2>
-<p><img src="https://i.imgur.com/QgFBiT2.png" alt="" /></p>
+<p>이러한 이유로 하나의 스크립트 파일로 개발이 진행되면서, 인프라 취약점 진단을 위한 스크립트가 유지보수 측면에서 심각한 어려움을 겪고 있다는 점입니다. 이 스크립트는 대상 마다 차이가 있지만, 적게는 8개에서 많게는 100개에 달하는 진단 항목을 포함하고 있으며, 이로 인해 복잡성이 증가해 유지보수가 매우 어려워졌습니다.</p>
 
-<p>JWT consists of three parts:</p>
+<p>이 문제에 대한 해결책으로, 개별 진단 항목을 독립적으로 개발한 후, 이들을 하나의 스크립트 파일로 통합하여 배포하는 방식을 제안합니다. 이 접근법은 개별적인 항목들의 유지보수를 용이하게 하면서도 최종적으로는 고객사에게 간편하게 배포할 수 있는 하나의 통합 스크립트를 제공합니다. 더불어, 많은 진단 대상과 테스트 과정에서의 시간 소모, 그리고 테스트 대상 누락 위험을 고려하여, 자동화된 테스트 방식을 도입하는 것이 필요합니다.</p>
+
+<p>따라서, 개별적인 개발과 통합 배포, 그리고 자동화된 테스트를 포함하는 이러한 방안은 개발 효율성을 높이고, 고객사에게 안정적이고 신뢰할 수 있는 서비스를 제공하는 데 크게 기여할 것으로 판단됩니다.
+<br /><br /></p>
+
+<h3 id="프로젝트-파일-구조-초안">프로젝트 파일 구조 초안</h3>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>취약점_진단_프로젝트/
+│
+├── linux/                 
+│   ├── global.sh
+│   ├── 취약점A/l
+│   │   ├── test_cases/
+|	│   │   ├── scenario1.sh
+|	│   │   ├── scenario2.sh
+|	│   │   ├── data/
+|	|	│   └── expected_results/
+│   │   ├── script.sh
+│   │   └── .gitlab-ci.yml
+│   └── 취약점B/
+│       ├── test_cases/
+│       ├── script.sh
+│       └── .gitlab-ci.yml
+│
+├── unix/                  
+│   └── ... (동일한 구조)
+│
+├── windows/              
+│   └── ... (동일한 구조)
+│
+├── docs/                  
+├── README.md
+└── .gitignore
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">test_cases/</code> 디렉터리의 주요 용도<br />
+①.테스트 시나리오 저장: 각 취약점에 대해 시뮬레이션할 수 있는 다양한 테스트 시나리오를 저장합니다. 이 시나리오들은 진단 스크립트가 예상대로 작동하는지 검증하는 데 사용됩니다.<br />
+②.입력 데이터 및 예상 결과: 테스트에 사용될 입력 데이터와 예상되는 결과 값을 저장합니다. 이를 통해 스크립트가 실제 운영 환경과 유사한 조건에서도 정확하게 작동하는지 테스트할 수 있습니다.<br />
+③.자동화된 테스트 스크립트: 테스트 케이스를 실행하는 자동화된 스크립트나 도구를 포함할 수 있습니다. 이는 CI/CD 파이프라인과 연동되어 자동 테스트를 수행할 수 있습니다.<br /></p>
+
+<p><code class="language-plaintext highlighter-rouge">data/</code> 디렉터리는 테스트 입력에 사용될 데이터 파일 저장<br />
+<code class="language-plaintext highlighter-rouge">expected_results/</code>는 스크립트의 예상 출력 결과를 포함
+<br /><br /></p>
+
+<h1 id="구축">구축</h1>
+
+<h2 id="1-docker-구축">1. Docker 구축</h2>
+<p>Ubuntu 서버에 Docker를 설치합니다. Docker는 컨테이너화된 애플리케이션을 실행하는 데 사용됩니다.</p>
+
+<p>먼저, 패키지 목록을 최신 상태로 업데이트하고 필요한 패키지들을 설치합니다.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update
+<span class="nb">sudo </span>apt <span class="nb">install </span>apt-transport-https ca-certificates curl software-properties-common
+</code></pre></div></div>
+
+<p>Docker의 공식 GPG 키를 시스템에 추가합니다. 이는 Docker 패키지의 무결성을 검증하는 데 사용됩니다.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-fsSL</span> https://download.docker.com/linux/ubuntu/gpg | <span class="nb">sudo </span>apt-key add -
+</code></pre></div></div>
+
+<p>Docker의 공식 APT 리포지토리를 시스템의 소스 리스트에 추가합니다.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository <span class="s2">"deb [arch=amd64] https://download.docker.com/linux/ubuntu </span><span class="si">$(</span>lsb_release <span class="nt">-cs</span><span class="si">)</span><span class="s2"> stable"</span>
+</code></pre></div></div>
+
+<p>패키지 목록을 다시 업데이트하고 Docker CE(Community Edition)를 설치합니다.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update
+<span class="nb">sudo </span>apt <span class="nb">install</span> <span class="nt">-y</span> docker-ce docker-compose
+</code></pre></div></div>
+
+<p>Docker 서비스를 시작하고, <code class="language-plaintext highlighter-rouge">docker</code> 명령어를 <code class="language-plaintext highlighter-rouge">sudo</code> 없이 사용할 수 있도록 사용자를 <code class="language-plaintext highlighter-rouge">docker</code> 그룹에 추가합니다.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl start docker
+<span class="nb">sudo </span>systemctl <span class="nb">enable </span>docker
+<span class="nb">sudo </span>usermod <span class="nt">-aG</span> docker <span class="k">${</span><span class="nv">USER</span><span class="k">}</span>
+</code></pre></div></div>
+
+<p>사용자를 <code class="language-plaintext highlighter-rouge">docker</code> 그룹에 추가한 후에는, 변경 사항을 적용하기 위해 로그아웃하고 다시 로그인해야 할 수도 있습니다.
+<br /><br /></p>
+
+<h2 id="2-docker-compose-파일-생성">2. Docker Compose 파일 생성</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.8'</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">gitlab</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">gitlab/gitlab-ce:latest</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">gitlab</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">8080:80'</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">8081:443'</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">8082:22'</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">$HOME/gitlab/config:/etc/gitlab</span>
+      <span class="pi">-</span> <span class="s">$HOME/gitlab/logs:/var/log/gitlab</span>
+      <span class="pi">-</span> <span class="s">$HOME/gitlab/data:/var/opt/gitlab</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">gitlab-network</span>
+
+  <span class="na">registry</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">registry:2</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">gitlab-registry</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">5000:5000'</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">$HOME/gitlab/registry:/var/lib/registry</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">gitlab-network</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">gitlab-network</span><span class="pi">:</span>
+    <span class="na">driver</span><span class="pi">:</span> <span class="s">bridge</span>
+</code></pre></div></div>
 <ul>
-  <li>Header: Contains information about the type of token (JWT) and the signature algorithm used (HMAC, RSA, etc.).</li>
-  <li>Payload: Contains Claim information to be included in the token. Claims can include attributes about the token user or additional data.</li>
-  <li>Signature: Combines the header and payload and signs them using the provided algorithm. This signature ensures the integrity and authentication of the token.</li>
-</ul>
-
-<p>Each part is separated in the form of aaaa.bbbb.cccc, and the values of the Header and Payload are base64 encoded.
-Since base64 can be decoded at any time, digital signing with the Signature is done to maintain the integrity of the Header and Payload.</p>
-
-<p>In other words, even if the Header and Payload are tampered with, the Signature verification can detect this tampering.</p>
-
-<h2 id="jwt-usage">JWT Usage</h2>
-<p>JWT is mainly used for user authentication and information exchange. When a user logs in, the server returns the user’s information in a JWT. Then, the user can authenticate themselves in subsequent server requests using this JWT.</p>
-
-<h3 id="advantages">Advantages</h3>
-<ul>
-  <li><strong>Self-contained</strong>: JWT contains all necessary information, eliminating the need for a separate state store, which is advantageous for implementing stateless servers.</li>
-  <li><strong>Security</strong>: The inclusion of a digital signature guarantees data integrity.</li>
-  <li><strong>Scalability</strong>: Easily used across various systems and languages.</li>
-</ul>
-
-<h3 id="disadvantages">Disadvantages</h3>
-<ul>
-  <li><strong>Limitations of Stateless</strong>: Since JWT is stateless, once issued, tokens are difficult to manage centrally on the server. This can lead to challenges in handling token expiration or cancellation.</li>
-  <li><strong>Token Expiration Handling</strong>: JWT can set expiration times, but once issued, the token remains valid until that time, making it difficult to expire early.</li>
-  <li><strong>Token Size</strong>: JWT can grow in size as it contains all necessary information, impacting network bandwidth and potentially causing performance degradation, especially in mobile environments.</li>
-  <li><strong>Performance Degradation</strong>: Each time a server verifies a token, it must compute the signature, which can cause performance issues in high-load environments.</li>
-</ul>
-
-<h1 id="vulnerabilities-summary">Vulnerabilities Summary</h1>
-<ol>
   <li>
-    <p>Unverified Signature<br />
-Failing to properly verify the Signature can lead to vulnerabilities like elevation of privileges and account takeover by merely tampering with the Payload.<br /></p>
+    <p><strong>version</strong>: Docker Compose 파일의 버전을 명시합니다. <code class="language-plaintext highlighter-rouge">3.8</code>은 현재 널리 사용되는 버전입니다.</p>
   </li>
-  <li>
-    <p>Information Leakage<br />
-This occurs when the Payload, which is only Base64 encoded and not encrypted, can be decoded and read by anyone, leading to the risk of sensitive data exposure.<br /></p>
-  </li>
-  <li>Algorithm Manipulation
+  <li><strong>services</strong>: 실행하려는 각 서비스(컨테이너)를 정의합니다.
     <ul>
-      <li>
-        <p>None Algorithm<br />
-A vulnerability exists when the <code class="language-plaintext highlighter-rouge">alg</code> field is set to <code class="language-plaintext highlighter-rouge">none</code>, considering the token valid without any signature verification. This allows attackers to tamper with the token’s payload without a signature, and the system might mistakenly recognize it as valid.<br /></p>
+      <li><strong>gitlab</strong>: GitLab 컨테이너의 구성입니다.
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">image</code>: 사용할 이미지. 여기서는 GitLab의 최신 커뮤니티 에디션을 사용합니다.</li>
+          <li><code class="language-plaintext highlighter-rouge">ports</code>: 호스트와 컨테이너 간 포트 매핑. GitLab 웹 인터페이스와 SSH 접근을 위해 필요합니다.</li>
+          <li><code class="language-plaintext highlighter-rouge">volumes</code>: 데이터, 로그, 설정 파일을 위한 볼륨 마운트.</li>
+        </ul>
       </li>
-      <li>
-        <p>Changing Asymmetric Encryption Algorithm to Symmetric<br />
-A vulnerability exists when changing an asymmetric encryption algorithm to a symmetric one and using the public key as a symmetric key (secret key or pre-shared key). This allows attackers to tamper with the payload and still pass signature verification.<br /></p>
+      <li><strong>registry</strong>: Docker Registry 컨테이너의 구성입니다.
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">image</code>: Docker Registry 이미지.</li>
+          <li><code class="language-plaintext highlighter-rouge">ports</code>: Docker Registry에 접근하기 위한 포트 매핑.</li>
+          <li><code class="language-plaintext highlighter-rouge">volumes</code>: Docker Registry의 데이터 저장을 위한 볼륨 마운트.</li>
+        </ul>
       </li>
     </ul>
   </li>
-  <li>
-    <p>JWK Injection<br />
-This occurs when including a JWK in the JWT header and directly providing public key information. Attackers can insert their own JWK into the tampered token’s header and create a signature with the corresponding secret key. If the server uses this JWK without verification to validate the token’s signature, the tampered token may be mistakenly recognized as valid.<br /></p>
+  <li><strong>networks</strong>: 사용할 네트워크를 정의합니다. 여기서는 간단한 브리지 네트워크를 사용합니다.</li>
+</ul>
+
+<p>👉 services의 registry은 컨테이너 레지스트리를 구성하기 위한 컨테이너이다.<br />
+👉 만약 컨테이너 레지스트리를 사용 안 할 예정이라면, 선언을 안해도 상관 없음.
+<br /><br /></p>
+
+<h2 id="3-gitlab-서비스-구성">3. GitLab 서비스 구성</h2>
+
+<p>설정을 적용하고 GitLab 서비스를 시작하기 위해 터미널에서 다음 명령을 실행합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up <span class="nt">-d</span>
+</code></pre></div></div>
+<p><br />
+GitLab 서비스를 중지하고 컨테이너를 제거하려면 다음 명령을 사용합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose down
+</code></pre></div></div>
+<p><br />
+이러한 설정을 통해 GitLab을 쉽게 배포하고 관리할 수 있습니다.<br />
+필요에 따라 GitLab의 설정을 조정하거나 추가 기능을 활성화하기 위해 <code class="language-plaintext highlighter-rouge">gitlab.rb</code> 파일을 편집할 수도 있습니다.
+<br /><br /></p>
+
+<h2 id="4-root-계정-비밀번호">4. root 계정 비밀번호</h2>
+
+<p>초기 비밀번호를 다음 명령을 사용하여 출력할 수 있습니다. 주의할 점은 해당 방법은 초기 세팅부터 24시간동안만 유지됩니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker exec -it &lt;Gitlab 컨테이너 이름&gt; /bin/bash cat /etc/gitlab/initial_root_password | grep Password:
+</code></pre></div></div>
+<p><br /></p>
+
+<p>Docker를 사용하는 경우, GitLab 컨테이너에 접속합니다.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> gitlab bash
+</code></pre></div></div>
+<p><br /></p>
+
+<p>GitLab 컨테이너 내부에서 GitLab 콘솔을 실행합니다.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gitlab-rails console
+</code></pre></div></div>
+<p><br /></p>
+
+<p>GitLab 콘솔에서 다음 명령어를 실행하여 관리자 비밀번호를 재설정합니다. 여기서 <code class="language-plaintext highlighter-rouge">your-new-password</code>는 원하는 새 비밀번호로 대체합니다.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user <span class="o">=</span> User.where<span class="o">(</span><span class="nb">id</span>: 1<span class="o">)</span>.first
+user.password <span class="o">=</span> <span class="s1">'your-new-password'</span>
+user.password_confirmation <span class="o">=</span> <span class="s1">'your-new-password'</span>
+user.save!
+<span class="nb">exit</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<p>변경 사항을 적용하기 위해 GitLab 서비스를 재설정 및 재시작할 수 있습니다.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gitlab-ctl reconfigure
+gitlab-ctl restart
+</code></pre></div></div>
+<p><br /></p>
+
+<h1 id="내부-설정">내부 설정</h1>
+
+<h2 id="1-custom-git-clone-url-for-https">1. Custom Git clone URL for HTTP(S)</h2>
+<p>회사 내에서 사용할 것이기 때문에, 내부망의 IP 주소로 사용할 것이다. 하지만 Gitlab의 경우, 기본값으로 초기 설정된 도메인 주소로 설정되어있다. 이러한 설정을 바꾸지 않으면, 추후 CI의 자동화 서버에서 <code class="language-plaintext highlighter-rouge">git clone</code>을 하게되는데 도메인 주소로 clone하게 된다. 자동화 서버 내 Hosts에 Gitlab 서버 IP 주소와 도메인이 매핑되어있지 않기 때문에, 에러가 발생된다.</p>
+
+<p>문제점을 해결하기 위해, 도메인을 사용하지 않고 IP 주소를 사용한다는 설정을 해줘야 한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">관리자 로그인 &gt; Configure Gitlab &gt; Settigs &gt; General &gt; Visibility and access controls &gt; Custom Git clone URL for HTTP(S)</code> 에서 <code class="language-plaintext highlighter-rouge">http://&lt;Gitlab 서버의 IP주소&gt;:&lt;Gitlab 포트&gt;/</code>으로 설정하면 된다.
+<img src="https://i.imgur.com/hqq0IxQ.png" alt="" /></p>
+
+<p>주의할 점은 root 경로를 기입해줘야 404 상태코드가 발생이 안된다는 것이다.<br />
+ex) http://192.168.0.35:8080 - X, http://192.168.0.35:8080/ - O</p>
+
+<h2 id="2-컨테이너-레지스트리-활성화">2. 컨테이너 레지스트리 활성화</h2>
+<p>나의 목표는 진단 스크립트 환경을 컨테이너로 돌릴 수 있다면, 돌리고 할 수 없다면 서버 구축 후 SSH으로 CI를 구축하는 것이다. 이를 위해 커스텀 컨테이너 이미지를 직접 생성해야하고, 생성한 이미지를 저장소에 저장을 해야한다.<br />
+기본 리눅스 컨테이너에 net-tools, service, systemctl 등이 설치가 되어있지 않고, apt 명령어를 통해 설치가 불가능하여 커스텀 이미지를 생성해야 함.<br /></p>
+
+<p>회사 사규에 회사 자산이 외부로 노출되는 것을 방지하고 있기 때문에 서버 내 컨테이너 저장소를 구축하여 저장하려고 한다. 이를 위해 Gitlab의 컨테이너 레지스트리를 구축해야 한다.<br /></p>
+
+<p>GitLab 서비스의 설정 파일(<code class="language-plaintext highlighter-rouge">gitlab.rb</code>)에서 Container Registry를 활성화하고 구성합니다.<br /></p>
+
+<p>다음 설정을 <code class="language-plaintext highlighter-rouge">gitlab.rb</code>에 추가하거나 수정합니다.</p>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gitlab_rails</span><span class="p">[</span><span class="s1">'registry_enabled'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">gitlab_rails</span><span class="p">[</span><span class="s1">'registry_host'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"&lt;호스트 IP 주소&gt;"</span>
+<span class="n">gitlab_rails</span><span class="p">[</span><span class="s1">'registry_port'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"5000"</span>
+<span class="n">gitlab_rails</span><span class="p">[</span><span class="s1">'registry_api_url'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"http://&lt;호스트 IP 주소&gt;:5000"</span>
+</code></pre></div></div>
+<p>Docker compose 파일에 <code class="language-plaintext highlighter-rouge">$HOME/gitlab/config:/etc/gitlab</code>하였기 때문에 컨테이터 내부에서 말고 호스트 내부의 <code class="language-plaintext highlighter-rouge">$HOME/gitlab/config/gitlab.rb</code> 파일을 수정해도 상관없음.<br /></p>
+
+<p>변경사항을 적용하기 위해 GitLab을 재구성하고 재시작합니다.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gitlab-ctl reconfigure
+gitlab-ctl restart
+</code></pre></div></div>
+<p>설정이 잘 되었다면, 프로젝트를 생성한 후 사이드 메뉴에서 <code class="language-plaintext highlighter-rouge">Project &gt; Deploy &gt; Container Registry</code>가 존재하는지 확인을 해야한다.
+<img src="https://i.imgur.com/kIXVC0Y.png" alt="" />
+만약 메뉴가 존재하지 않는다면, 설정이 먹히지 않았다는 것이다. 이럴 땐, registry 컨테이너가 동작하고 있는지와 에러 로그를 확인하여 문제점을 해결하면 된다.</p>
+
+<p>이미지를 푸시하고 풀하는 방법은 다음과 같습니다</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 로그인</span>
+docker login &lt;호스트 IP 주소&gt;:5000
+
+<span class="c"># 이미지 푸시</span>
+docker push &lt;호스트 IP 주소&gt;:5000/your-username/your-project/your-image:tag
+
+<span class="c"># 이미지 풀</span>
+docker pull &lt;호스트 IP 주소&gt;:5000/your-username/your-project/your-image:tag
+</code></pre></div></div>
+<p>docker 로그인은 Gitlab 계정 정보를 입력하면 된다.<br /></p>
+
+<p><img src="https://i.imgur.com/ogPSKDE.png" alt="" />
+Push가 무사히 완료가 되면, 위 사진처럼 컨테이너 이미지가 저장이 되었다는 것을 확인할 수 있다.
+<br /><br /></p>
+
+<h2 id="3-gitlab-runner-구축">3. Gitlab runner 구축</h2>
+<p>이제 CI/CD를 구축하려면, Gitlab runner을 구축하여 저장소 내부의 <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> 파일을 통해 CI/CD를 이용할 수 있다.<br /></p>
+
+<p>아래는 GitLab Runner를 추가한 <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> 파일의 예시입니다</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.8'</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">gitlab</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">gitlab/gitlab-ce:latest</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">gitlab</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">8080:80'</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">8081:443'</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">8082:22'</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">$HOME/gitlab/config:/etc/gitlab</span>
+      <span class="pi">-</span> <span class="s">$HOME/gitlab/logs:/var/log/gitlab</span>
+      <span class="pi">-</span> <span class="s">$HOME/gitlab/data:/var/opt/gitlab</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">gitlab-network</span>
+
+  <span class="na">registry</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">registry:2</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">gitlab-registry</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">5000:5000'</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">$HOME/gitlab/registry:/var/lib/registry</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">gitlab-network</span>
+
+  <span class="na">gitlab-runner</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">gitlab/gitlab-runner:latest</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">gitlab-runner</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">$HOME/gitlab-runner/config:/etc/gitlab-runner</span>
+      <span class="pi">-</span> <span class="s">/var/run/docker.sock:/var/run/docker.sock</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">gitlab-network</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">gitlab-network</span><span class="pi">:</span>
+    <span class="na">driver</span><span class="pi">:</span> <span class="s">bridge</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>image</strong>: GitLab Runner 서비스에 사용될 Docker 이미지를 지정합니다. 여기서는 GitLab에서 제공하는 최신 버전의 <code class="language-plaintext highlighter-rouge">gitlab/gitlab-runner</code> 이미지를 사용합니다.</li>
+  <li><strong>container_name</strong>: 컨테이너의 이름을 <code class="language-plaintext highlighter-rouge">gitlab-runner</code>로 설정합니다. 이 이름은 Docker 환경 내에서 해당 컨테이너를 식별하는 데 사용됩니다.</li>
+  <li><strong>restart</strong>: 컨테이너의 재시작 정책을 <code class="language-plaintext highlighter-rouge">always</code>로 설정합니다. 이는 Docker 호스트가 재부팅되거나 컨테이너가 다른 이유로 중지될 경우 자동으로 재시작되도록 합니다.</li>
+  <li><strong>volumes</strong>:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">$HOME/gitlab-runner/config:/etc/gitlab-runner</code>: GitLab Runner의 설정 파일들을 저장하기 위한 볼륨을 마운트합니다. 이 경로에는 Runner의 구성 파일과 등록 정보가 저장됩니다.</li>
+      <li><code class="language-plaintext highlighter-rouge">/var/run/docker.sock:/var/run/docker.sock</code>: 호스트 시스템의 Docker 소켓을 컨테이너 내부로 마운트합니다. 이를 통해 GitLab Runner 컨테이너가 호스트의 Docker 엔진을 사용하여 다른 Docker 컨테이너를 생성하고 관리할 수 있습니다. 이 방법은 Docker-in-Docker(DinD)를 사용하는 것과는 다른 접근 방식입니다.</li>
+    </ul>
   </li>
-  <li>
-    <p>JKU Spoofing<br />
-This happens when the server uses a JSON Web Key (JWK) obtained from the JKU URL in the header without verification to validate the JWT’s signature. Attackers can manipulate the JKU claim to insert their own JWK URL, creating a tampered token signed with their key. If the server does not verify the authenticity of the altered JKU URL and uses it, the tampered token may be recognized as valid, exposing the server to security risks.<br /></p>
-  </li>
-  <li>Vulnerability in the ‘kid’ Field<br />
-This occurs during the process of the server using the <code class="language-plaintext highlighter-rouge">kid</code> value in the token’s header to find the key for token validation. The server searches the DB or file system for the key corresponding to the <code class="language-plaintext highlighter-rouge">kid</code> value. However, if the <code class="language-plaintext highlighter-rouge">kid</code> value is used without verification, attackers can manipulate this value to attempt attacks like SQL Injection, Path Traversal, or OS Command Injection. Such attacks can threaten server security and bypass token verification or cause other damage to the system. Therefore, the server needs a process to sufficiently verify and filter the <code class="language-plaintext highlighter-rouge">kid</code> value before use, ensuring it comes from a trusted source.<br /></li>
-</ol>
+  <li><strong>networks</strong>: GitLab Runner가 <code class="language-plaintext highlighter-rouge">gitlab-network</code>라는 Docker 네트워크를 사용하도록 설정합니다. 이 네트워크는 GitLab 서비스와 통신하는 데 사용됩니다.
+<br /></li>
+</ul>
+
+<p>변경 사항을 적용하기 위해 현재 실행 중인 서비스를 중지합니다</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose down
+</code></pre></div></div>
+<p><br /></p>
+
+<p>변경된 <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> 파일을 사용하여 모든 서비스를 다시 시작합니다</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up <span class="nt">-d</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<p>Gitlab에 관리자로 로그인 후 <code class="language-plaintext highlighter-rouge">Admin Area &gt; CI/CD &gt; Runners</code>에서 Runner 토큰 확인
+<img src="https://i.imgur.com/wa6Tlaf.png" alt="" />
+<br /></p>
+
+<p>Gitlab Runner 컨테이너에 접근하여, Runner를 등록합니다.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> gitlab-runner bash
+gitlab-runner register
+</code></pre></div></div>
+<p><br /></p>
+
+<p>등록 시 물어보는 항목은 아래와 같음</p>
+<ul>
+  <li>GitLab 인스턴스 URL (<code class="language-plaintext highlighter-rouge">http://&lt;gitlab-host&gt;:&lt;gitlab-port&gt;</code>).</li>
+  <li>위에서 얻은 Registration Token.</li>
+  <li>Runner 설명 (예: <code class="language-plaintext highlighter-rouge">my-runner</code>).</li>
+  <li>Runner 태그 (선택사항).</li>
+  <li>Executor 선택 (Docker를 추천합니다).</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">Executor</code> 선택은 현재 도커 컨테이너로 구축하는 중이라서 Docker로 선택하였습니다.
+만약 VM이라던가, 다른 서버로 연결하여 한다면 SSH로 선택하여 Runner를 추가하면 됩니다.
+<br /></p>
+
+<p>등록에 성공하면, Runners에 등록된 인스턴스가 보이게 됩니다.
+<img src="https://i.imgur.com/Xlf36Ax.png" alt="" />
+<br /><br /></p>
+
+<h2 id="4-gitlab-백업-설정">4. Gitlab 백업 설정</h2>
+
+<p>GitLab 컨테이너에서 백업 명령을 실행해야 합니다.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> gitlab bash
+<span class="nv">$ </span>gitlab-backup create
+</code></pre></div></div>
+<p><br /></p>
+
+<p>GitLab의 모든 중요 데이터(데이터베이스, 업로드된 파일, 리포지토리 등)를 백업합니다. 백업 파일은 <code class="language-plaintext highlighter-rouge">/var/opt/gitlab/backups</code> 디렉토리에 저장됩니다.<br /></p>
+
+<p>백업한 데이터를 복구하려면, 백업 파일을 원래의 위치로 복원하고 GitLab을 재시작해야 합니다. GitLab 데이터 복구 명령은 다음과 같습니다.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gitlab-backup restore <span class="nv">BACKUP</span><span class="o">=</span>backup_file_name
+</code></pre></div></div>
+<p><br /></p>
+
+<p>위와 같이 하면 Gitlab 데이터를 백업할 수 있다. <br />
+하지만, 주기적으로 백업을 못한다는 점과 gitlab 설정파일은 별도로 저장을 해줘야 한다는 점이 단점이다.<br /></p>
+
+<p>이를 위해서 shell script 파일을 만들어서 Crontab으로 주기적인 백업과 gitlab 설정파일을 백업하도록 하겠다.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nv">BACKUP_DIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/gitlab/backup"</span>
+  
+<span class="c"># Gitlab 데이터 백업</span>
+docker <span class="nb">exec</span> <span class="nt">-t</span> gitlab gitlab-backup create
+  
+<span class="c"># 백업 파일 이름 가져오기</span>
+<span class="nv">BACKUP_FILE</span><span class="o">=</span><span class="si">$(</span>docker <span class="nb">exec</span> <span class="nt">-t</span> gitlab <span class="nb">ls</span> <span class="nt">-t</span> /var/opt/gitlab/backups | <span class="nb">head</span> <span class="nt">-n</span> 1 | <span class="nb">tr</span> <span class="nt">-d</span> <span class="s1">'\r'</span><span class="si">)</span>
+  
+<span class="c"># 백업 파일을 호스트 시스템으로 복사</span>
+docker <span class="nb">cp</span> <span class="s2">"gitlab:/var/opt/gitlab/backups/</span><span class="nv">$BACKUP_FILE</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$BACKUP_DIR</span><span class="s2">/gitlab_data/"</span>
+  
+<span class="c"># Gitlab 설정 파일 백업</span>
+<span class="nv">GITLAB_CONFIG</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/gitlab/config/gitlab.rb"</span>
+  
+<span class="c"># 현재 날짜와 시간을 YYYYMMDD_HHMM 형식으로 가져오기</span>
+<span class="nv">CURRENT_DATE</span><span class="o">=</span><span class="si">$(</span><span class="nb">date</span> +<span class="s2">"%Y%m%d_%H%M"</span><span class="si">)</span>
+
+<span class="nb">cp</span> <span class="s2">"</span><span class="nv">$GITLAB_CONFIG</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$BACKUP_DIR</span><span class="s2">/gitlab_conf/gitlab_</span><span class="nv">$CURRENT_DATE</span><span class="s2">.rb"</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<p>계속 저장만 하면 용량이 부족할 수 있기 때문에, 90일이 지난 백업 파일은 삭제하도록 하기 위해 Shell Script를 만들었다.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># 백업 파일이 저장된 디렉토리</span>
+<span class="nv">BACKUP_DIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/gitlab/backup"</span>
+
+<span class="c"># 90일보다 오래된 백업 파일 삭제</span>
+find <span class="s2">"</span><span class="nv">$BACKUP_DIR</span><span class="s2">/gitlab_conf/"</span> <span class="nt">-type</span> f <span class="nt">-name</span> <span class="s2">"*.rb"</span> <span class="nt">-mtime</span> +90 <span class="nt">-exec</span> <span class="nb">rm</span> <span class="o">{}</span> <span class="se">\;</span>
+find <span class="s2">"</span><span class="nv">$BACKUP_DIR</span><span class="s2">/gitlab_data/"</span> <span class="nt">-type</span> f <span class="nt">-name</span> <span class="s2">"*.tar"</span> <span class="nt">-mtime</span> +90 <span class="nt">-exec</span> <span class="nb">rm</span> <span class="o">{}</span> <span class="se">\;</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<p>이제 해당 스크립트를 일정 주기로 돌릴 Crontab에 설정을 해야한다.<br /></p>
+
+<p>귀찮은 작업이라고 판단되어, 자동 등록 스크립트를 만들었다.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># 백업 및 삭제 스크립트 경로</span>
+<span class="nv">BACKUP_DIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/gitlab/backup"</span>
+<span class="nv">GITLAB_BACKUP_SCRIPT</span><span class="o">=</span><span class="s2">"</span><span class="nv">$BACKUP_DIR</span><span class="s2">/gitlab_backup.sh"</span>
+<span class="nv">BACKUP_DEL_SCRIPT</span><span class="o">=</span><span class="s2">"</span><span class="nv">$BACKUP_DIR</span><span class="s2">/backup_del.sh"</span>
+  
+<span class="c"># crontab에 추가할 내용을 임시 파일에 작성</span>
+<span class="nv">CRON_FILE</span><span class="o">=</span><span class="s2">"/tmp/crontab-</span><span class="nv">$$</span><span class="s2">"</span>
+crontab <span class="nt">-l</span> <span class="o">&gt;</span> <span class="nv">$CRON_FILE</span> 2&gt;/dev/null <span class="o">||</span> <span class="nb">true
+echo</span> <span class="s2">"0 0 * * * </span><span class="nv">$GITLAB_BACKUP_SCRIPT</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> <span class="nv">$CRON_FILE</span>
+<span class="nb">echo</span> <span class="s2">"0 12 * * * </span><span class="nv">$GITLAB_BACKUP_SCRIPT</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> <span class="nv">$CRON_FILE</span>
+<span class="nb">echo</span> <span class="s2">"0 1 * * * </span><span class="nv">$BACKUP_DEL_SCRIPT</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> <span class="nv">$CRON_FILE</span>
+<span class="nb">echo</span> <span class="s2">"0 13 * * * </span><span class="nv">$BACKUP_DEL_SCRIPT</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> <span class="nv">$CRON_FILE</span>
+  
+<span class="c"># crontab 업데이트</span>
+crontab <span class="nv">$CRON_FILE</span>
+  
+<span class="c"># 임시 파일 삭제</span>
+<span class="nb">rm</span> <span class="nt">-f</span> <span class="nv">$CRON_FILE</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<p>실행 권한을 부여해서 동작시키면 등록이 완료된다.</p>
 
     </div>
 
     <div class="post__share">
       <div class="share__list">
-        <a class="share__link share__facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2024/01/26/Summary-of-JWT-Vulnerabilities/" onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+        <a class="share__link share__facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2024/02/28/%EC%B7%A8%EC%95%BD%EC%A0%90-%EC%A7%84%EB%8B%A8-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-DevOps-%EA%B5%AC%EC%B6%95/" onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
 
-        <a class="share__link share__twitter" href="https://twitter.com/intent/tweet?text=Summary%20of%20JWT%20Vulnerabilities&url=/2024/01/26/Summary-of-JWT-Vulnerabilities/" onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+        <a class="share__link share__twitter" href="https://twitter.com/intent/tweet?text=%EC%B7%A8%EC%95%BD%EC%A0%90%20%EC%A7%84%EB%8B%A8%20%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20DevOps%20%EA%B5%AC%EC%B6%95&url=/2024/02/28/%EC%B7%A8%EC%95%BD%EC%A0%90-%EC%A7%84%EB%8B%A8-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-DevOps-%EA%B5%AC%EC%B6%95/" onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
 
-        <a class="share__link share__pinterest" href="http://pinterest.com/pin/create/button/?url=/2024/01/26/Summary-of-JWT-Vulnerabilities/&amp;media=/images/Post-01.jpg&amp;description=Summary%20of%20JWT%20Vulnerabilities" onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+        <a class="share__link share__pinterest" href="http://pinterest.com/pin/create/button/?url=/2024/02/28/%EC%B7%A8%EC%95%BD%EC%A0%90-%EC%A7%84%EB%8B%A8-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-DevOps-%EA%B5%AC%EC%B6%95/&amp;media=/images/Post-01.jpg&amp;description=%EC%B7%A8%EC%95%BD%EC%A0%90%20%EC%A7%84%EB%8B%A8%20%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20DevOps%20%EA%B5%AC%EC%B6%95" onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
       </div>
     </div>
 
     <div class="post__navigation">
       
-      <a class="prev" href="/2024/01/26/JWT-%E1%84%8E%E1%85%B1%E1%84%8B%E1%85%A3%E1%86%A8%E1%84%8C%E1%85%A5%E1%86%B7-%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5/">
-        <img class="post__nav-image lazy" data-src="/images/Post-01.jpg" alt="JWT 취약점 정리">
+      <a class="prev" href="/2024/01/26/Summary-of-JWT-Vulnerabilities/">
+        <img class="post__nav-image lazy" data-src="/images/Post-01.jpg" alt="Summary of JWT Vulnerabilities">
         <div class="post__nav-box">
           <div class="post__nav post__nav__prev"><i class="ion ion-md-arrow-round-back"></i> Previous Post</div>
-          <h4 class="post__nav__title">JWT 취약점 정리</h4>
+          <h4 class="post__nav__title">Summary of JWT Vulnerabilities</h4>
         </div>
       </a>
       
-      
-      <a class="next" href="/2024/02/28/%EC%B7%A8%EC%95%BD%EC%A0%90-%EC%A7%84%EB%8B%A8-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-DevOps-%EA%B5%AC%EC%B6%95/">
-        <img class="post__nav-image lazy" data-src="/images/Post-01.jpg" alt="취약점 진단 스크립트 DevOps 구축">
-        <div class="post__nav-box">
-          <div class="post__nav post__nav__next">Next Post <i class="ion ion-md-arrow-forward"></i></div>
-          <h4 class="post__nav__title">취약점 진단 스크립트 DevOps 구축</h4>
-        </div>
-      </a>
       
     </div>
 
@@ -597,7 +937,7 @@ This occurs during the process of the server using the <code class="language-pla
           <span class="article__minutes">
             
             
-              10 min read
+              13 min read
             
           </span>
           <time class="article__date"
