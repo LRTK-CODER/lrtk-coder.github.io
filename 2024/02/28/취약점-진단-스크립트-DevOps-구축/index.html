@@ -605,27 +605,25 @@ Push가 무사히 완료가 되면, 위 사진처럼 컨테이너 이미지가 �
     </ul>
   </li>
   <li><strong>networks</strong>: GitLab Runner가 <code class="language-plaintext highlighter-rouge">gitlab-network</code>라는 Docker 네트워크를 사용하도록 설정합니다. 이 네트워크는 GitLab 서비스와 통신하는 데 사용됩니다.
-<br /></li>
-</ul>
-
-<p>변경 사항을 적용하기 위해 현재 실행 중인 서비스를 중지합니다</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose down
-</code></pre></div></div>
-<p><br />
-변경된 <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> 파일을 사용하여 모든 서비스를 다시 시작합니다</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up <span class="nt">-d</span>
-</code></pre></div></div>
-<p><br />
+<br />
+변경 사항을 적용하기 위해 현재 실행 중인 서비스를 중지합니다.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose down
+</code></pre></div>    </div>
+    <p><br />
+변경된 <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> 파일을 사용하여 모든 서비스를 다시 시작합니다.</p>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up <span class="nt">-d</span>
+</code></pre></div>    </div>
+    <p><br />
 Gitlab에 관리자로 로그인 후 <code class="language-plaintext highlighter-rouge">Admin Area &gt; CI/CD &gt; Runners</code>에서 Runner 토큰 확인
 <img src="https://i.imgur.com/wa6Tlaf.png" alt="" />
 <br />
 Gitlab Runner 컨테이너에 접근하여, Runner를 등록합니다.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> gitlab-runner bash
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> gitlab-runner bash
 gitlab-runner register
-</code></pre></div></div>
-<p><br />
+</code></pre></div>    </div>
+    <p><br />
 등록 시 물어보는 항목은 아래와 같음</p>
-<ul>
+  </li>
   <li>GitLab 인스턴스 URL (<code class="language-plaintext highlighter-rouge">http://&lt;gitlab-host&gt;:&lt;gitlab-port&gt;</code>).</li>
   <li>위에서 얻은 Registration Token.</li>
   <li>Runner 설명 (예: <code class="language-plaintext highlighter-rouge">my-runner</code>).</li>
