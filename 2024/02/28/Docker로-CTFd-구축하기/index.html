@@ -5,10 +5,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>LRTK</title>
-  <meta name='description' content='A blog where I share my personal learnings and experiences in information security'>
+  <title>Docker로 CTFd 구축하기</title>
+  <meta name='description' content='CTFd는 "Capture The Flag daemon"의 약자로, 정보 보안 기술을 경쟁적으로 연습하고 향상시키기 위한 웹 기반 플랫폼입니다. 정보 보안 관련 대회인 Capture The Flag (CTF)를 운영하고 관리하는 데 사용되며, 문제 생성, 점수 관리, 참가자 진행 ...'>
 
-  <link rel="canonical" href="/tag/korean/">
+  <link rel="canonical" href="/2024/02/28/Docker%EB%A1%9C-CTFd-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0/">
   <link rel="alternate" type="application/rss+xml" title="LRTK" href="/feed.xml">
 
   <!-- Fonts -->
@@ -225,146 +225,337 @@
 <!-- end search -->
 
     <!-- begin content -->
-    <main class="content" aria-label="Content"><div class="container">
-  <div class="row">
-    <div class="col col-8 col-d-10 col-m-12 push-m-0 push-d-1 push-2">
-      <div class="archive-box">
-        <span class="archive-meta">2 posts tagged</span>
-        <h1 class="archive-title">Korean</h1>
+    <main class="content" aria-label="Content"><div class="post-head">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col col-6 col-t-12">
+        <div class="image-box">
+          <img class="post-image lazy" data-src="/images/2024-01-29-Docker로-CTFd-구축하기.jpg" alt="Docker로 CTFd 구축하기">
+        </div>
+      </div>
+      
+  
+      <div class="col col-6 col-t-12">
+        <div class="post-head__box">
+        
+          <div class="post__meta">
+            <span class="post__minutes">
+              
+              
+                2 min read
+              
+              <time class="post__date"
+                datetime="2024-02-28T19:50:00+09:00">2024-02-28 19:50</time>
+            </span>
+          </div>
+        
+          <h2 class="post__title">Docker로 CTFd 구축하기</h2>
+        
+          <div class="post__bottom">
+        
+            <div class="post__author">
+              <a href="/about/" aria-label="LRTK"><img class="post__author-image"
+                  src="/images/author.jpeg" alt="LRTK's Picture"></a>
+            </div>
+        
+            <div class="post__bottom-meta">
+              <a href="/about/" class="post__author-link">LRTK</a>
+              
+              <span>in</span>
+              <span class="post-tags">
+                
+                <a href="/tag/Korean" class="post__tag">Korean</a>
+                
+                <a href="/tag/CTF" class="post__tag">CTF</a>
+                
+                <a href="/tag/Study" class="post__tag">Study</a>
+                
+                <a href="/tag/ETC" class="post__tag">ETC</a>
+                
+              </span>
+              
+            </div>
+          </div>
+        
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- begin post -->
+<div class="container">
+  <article class="post animate">
+
+    <div class="post__content">
+      <p>CTFd는 “Capture The Flag daemon”의 약자로, 정보 보안 기술을 경쟁적으로 연습하고 향상시키기 위한 웹 기반 플랫폼입니다. 
+정보 보안 관련 대회인 Capture The Flag (CTF)를 운영하고 관리하는 데 사용되며, 문제 생성, 점수 관리, 참가자 진행 상황 추적 등을 지원합니다.</p>
+
+<h2 id="도커-설치">도커 설치</h2>
+<p>Ubuntu 22.04 LTS으로 환경 구축 후 다운로드를 진행하였습니다.
+인터넷에 Ubuntu 환경에 도커를 설치하는 과정이 매우 상세히 나와있기 때문에 도커 설치는 넘어가도록 하겠습니다.</p>
+<h3 id="1-ctfd-저장소-가져오기">1. CTFd 저장소 가져오기</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/CTFd/CTFd.git
+<span class="nb">cd </span>CTFd
+</code></pre></div></div>
+
+<h3 id="2-docker-compose으로-환경-구축">2. Docker Compose으로 환경 구축</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">head</span> <span class="nt">-c</span> 64 /dev/urandom <span class="o">&gt;</span> .ctfd_secret_key
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi docker-compose.yml
+
+services:
+	ctfd: ... 
+		environment:
+			- <span class="nv">SECRET_KEY</span><span class="o">=</span>file:.ctfd_secret_key
+			...
+</code></pre></div></div>
+<p><a href="https://docs.ctfd.io/docs/deployment/installation/#docker">CTFd 공식 문서</a>에서 나온대로 <code class="language-plaintext highlighter-rouge">head -c 64 /dev/urandom &gt; .ctfd_secret_key</code>으로 Flask의 <code class="language-plaintext highlighter-rouge">secret key</code>를 랜덤한 값으로 생성하여 compose 파일에 반영합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up <span class="nt">-d</span>
+</code></pre></div></div>
+<p>이후 <code class="language-plaintext highlighter-rouge">localhost:8000</code>으로 접근하여 웹 페이지가 잘 뜨는지 확인합니다.</p>
+
+<h3 id="3-ctfd-plugin-설정">3. CTFd Plugin 설정</h3>
+<p>저는 여러 CTF 사이트들 처럼 컨테이너에 문제 환경을 구성하여 각 사용자 별로 개별 문제 환경을 제공하려고 합니다. 그러긴 위해선 CTFd Plugin을 사용해야 합니다.
+몇 개를 찾아본 결과, <a href="https://github.com/phannhat17/CTFd-Docker-Plugin">phannhat17의 CTFd-Docker-Plugin</a>이 잘 되는 것을 확인하였습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~
+
+git clone https://github.com/phannhat17/CTFd-Docker-Plugin.git
+<span class="nb">cp</span> <span class="nt">-r</span> ./CTFd-Docker-Plugin ./CTFd/CTFd/plugins/containers
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">CTFd</code> 디렉터리에서 나온 다음, 해당 <code class="language-plaintext highlighter-rouge">CTFd-Docker-Plugin</code> 저장소를 다운로드하여 <code class="language-plaintext highlighter-rouge">CTFd</code>의 <code class="language-plaintext highlighter-rouge">plugins</code> 디렉터리에 복사하였습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi ./CTFd/requirements.txt
+
+...
+docker
+paramiko
+apscheduler
+...
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">CTFd-Docker-Plugin/requirements.txt</code>에서 사용하는 파이썬 라이브러리를 확인하여 <code class="language-plaintext highlighter-rouge">CTFd/requirements.txt</code>에 추가합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi ./CTFd/docker-compose.yml
+
+services:
+	ctfd: ... 
+		volumes:
+			- /var/run/docker.sock:/var/run/docker.sock
+			...
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi /lib/systemd/system/docker.service
+
+...
+<span class="o">[</span>Service] <span class="nv">Type</span><span class="o">=</span>notify
+<span class="c"># the default is not to use systemd for cgroups because the delegate issues still</span>
+<span class="c"># exists and systemd currently does not support the cgroup feature set required </span>
+<span class="c"># for containers run by docker </span>
+<span class="c"># ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock</span>
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/dockerd <span class="nt">-H</span> tcp://0.0.0.0:2375 <span class="nt">-H</span> unix:///var/run/docker.sock 
+<span class="nv">ExecReload</span><span class="o">=</span>/bin/kill <span class="nt">-s</span> HUP <span class="nv">$MAINPID</span> 
+<span class="nv">TimeoutStartSec</span><span class="o">=</span>0
+<span class="nv">RestartSec</span><span class="o">=</span>2
+<span class="nv">Restart</span><span class="o">=</span>always
+....
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">CTFd</code> 서비스에서 Docker 데몬을 제어하기 위해 compose 파일에 <code class="language-plaintext highlighter-rouge">docker.sock</code>를 추가하였습니다. 또한 systemctl에서 동작 시 TCP 포트 2375와 Unix 소켓을 활성화하는 옵션(<code class="language-plaintext highlighter-rouge"># ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock</code>)을 넣었습니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service dockerd restart
+
+<span class="nb">cd </span>CTFd
+docker-compose down
+docker-compose build
+docker-compose up <span class="nt">-d</span>
+</code></pre></div></div>
+<p>설정한 값을 반영하기 위해 docker 데몬 재시작 및 compose를 다시 올립니다.</p>
+
+<p><img src="https://i.imgur.com/PMccmRg.png" alt="" />
+이후, CTFd Admin에 접근하여 상단 메뉴의 Plugins &gt; Containers로 이동하여 Settings 버튼을 클릭합니다.</p>
+
+<p><img src="https://i.imgur.com/igiZBk6.png" alt="" />
+설정에서 Docker Host와 컨테이너 만료 시간, 최대 램/CPU 설정을 하고 Submit를 클릭합니다.</p>
+
+<p><img src="https://i.imgur.com/fCLrgcp.png" alt="" />
+설정이 잘 되었으면, 문제 생성 페이지 내 Image 항목에서 도커에 저장된 Image들을 확인할 수 있습니다.</p>
+
+    </div>
+
+    <div class="post__share">
+      <div class="share__list">
+        <a class="share__link share__facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2024/02/28/Docker%EB%A1%9C-CTFd-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0/" onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+
+        <a class="share__link share__twitter" href="https://twitter.com/intent/tweet?text=Docker%EB%A1%9C%20CTFd%20%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0&url=/2024/02/28/Docker%EB%A1%9C-CTFd-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0/" onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+
+        <a class="share__link share__pinterest" href="http://pinterest.com/pin/create/button/?url=/2024/02/28/Docker%EB%A1%9C-CTFd-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0/&amp;media=/images/2024-01-29-Docker로-CTFd-구축하기.jpg&amp;description=Docker%EB%A1%9C%20CTFd%20%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0" onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+      </div>
+    </div>
+
+    <div class="post__navigation">
+      
+      
+      <a class="next" href="/2024/02/28/%EC%B7%A8%EC%95%BD%EC%A0%90-%EC%A7%84%EB%8B%A8-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-DevOps-%EA%B5%AC%EC%B6%95/">
+        <img class="post__nav-image lazy" data-src="/images/Post-02.jpg" alt="취약점 진단 스크립트 DevOps 구축">
+        <div class="post__nav-box">
+          <div class="post__nav post__nav__next">Next Post <i class="ion ion-md-arrow-forward"></i></div>
+          <h4 class="post__nav__title">취약점 진단 스크립트 DevOps 구축</h4>
+        </div>
+      </a>
+      
+    </div>
+
+  </article>
+</div>
+<!-- end post -->
+
+
+
+
+
+
 
 <div class="container">
+  <div class="related-posts is-related">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <h3 class="related-title">You may also like</h3>
+          <div class="row grid">
+
+          
+            
+            
+
+            
+
+            
+
+            <div class="article col col-4 col-d-6 col-t-12 grid__post">
+              <div class="article__inner">
+
+                
+                <a class="article__image" href="/2024/02/28/%EC%B7%A8%EC%95%BD%EC%A0%90-%EC%A7%84%EB%8B%A8-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-DevOps-%EA%B5%AC%EC%B6%95/">
+                  <img class="lazy" data-src="/images/Post-02.jpg" alt="취약점 진단 스크립트 DevOps 구축">
+                </a>
+                
+
+                <div class="article__content">
+
+                  <div class="article__meta">
+                    <span class="article__minutes">
+                      
+                      
+                        10 min read
+                      
+                      <time class="article__date"
+                        datetime="2024-02-28T19:50:00+09:00">2024-02-28 19:50</time>
+                    </span>
+                  </div>
+
+                  <h2 class="article__title">취약점 진단 스크립트 DevOps 구축</h2>
+
+                  <p class="article__excerpt">컨설팅 사업을 위한 인프라 취약점 진단 스크립트 구축에 관한 개요를 제공합니다. 복잡한 유지보수 문제를 해결하기 위해 개별 진단 항목을 독립적으로 개발하고, 이를 하나의 통합 스크립트 파일로 배포하는 방안을 제안합니다. 또한, Docker를 활용...</p>
+
+                  <div class="article__bottom">
+
+                    
+                    <div class="article__author">
+                      <a href="/about/" aria-label="LRTK"><img class="article__author-image lazy" data-src="/images/author.jpeg" alt="LRTK's Picture"></a>
+                    </div>
+                    
+
+                    <div class="article__bottom-meta">
+                      
+                        <a href="/about/" class="article__author-link">LRTK</a>
+                      
+                      
+                      <span>in</span>
+                      <span class="article-tags">
+                        
+                          <a href="/tag/Korean" class="article__tag">Korean</a>
+                        
+                          <a href="/tag/DevOps" class="article__tag">DevOps</a>
+                        
+                          <a href="/tag/Study" class="article__tag">Study</a>
+                        
+                          <a href="/tag/ETC" class="article__tag">ETC</a>
+                        
+                      </span>
+                      
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+            
+                
+              
+            
+            
+            
+
+            
+
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <!-- begin comments -->
+<div class="container">
   <div class="row">
-    <div class="col col-12 col-d-10 col-m-12 push-m-0 push-d-1">
-      <div class="container__inner">
-        <div class="row grid">
-          
-            <div class="article col col-4 col-d-6 col-t-12 grid__post animate">
-  <div class="article__inner">
-
-    
-    <a class="article__image" href="/2024/02/28/%EC%B7%A8%EC%95%BD%EC%A0%90-%EC%A7%84%EB%8B%A8-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-DevOps-%EA%B5%AC%EC%B6%95/">
-      <img class="lazy" data-src="/images/Post-02.jpg" alt="취약점 진단 스크립트 DevOps 구축">
-    </a>
-    
-
-    <div class="article__content">
-
-      <div class="article__meta">
-        <span class="article__minutes">
-          
-            
-              13 min read
-          
-          <time class="article__date" datetime="2024-02-28T19:50:00+09:00">2024-02-28 19:50</time>
-        </span>
-      </div>
-
-      <h2 class="article__title">취약점 진단 스크립트 DevOps 구축</h2>
-
-      <p class="article__excerpt">컨설팅 사업을 위한 인프라 취약점 진단 스크립트 구축에 관한 개요를 제공합니다. 복잡한 유지보수 문제를 해결하기 위해 개별 진단 항목을 독립적으로 개발하고, 이를 하나의 통합 스크립트 파일로 배포하는 방안을 제안합니다. 또한, Docker를 활용...</p>
-
-      <div class="article__bottom">
-
-        
-        <div class="article__author">
-          <a href="/about/" aria-label="LRTK"><img class="article__author-image lazy" data-src="/images/author.jpeg" alt="LRTK's Picture"></a>
-        </div>
-        
-
-        <div class="article__bottom-meta">
-          
-            <a href="/about/" class="article__author-link">LRTK</a>
-          
-          
-            <span>in</span>
-            <span class="article-tags">
-              
-                <a href="/tag/Korean" class="article__tag">Korean</a>
-              
-                <a href="/tag/DevOps" class="article__tag">DevOps</a>
-              
-                <a href="/tag/Study" class="article__tag">Study</a>
-              
-                <a href="/tag/ETC" class="article__tag">ETC</a>
-              
-            </span>
-          
+    <div class="col col-12">
+      <div class="disqus-inner">
+        <div id="disqus_thread" class="post-comments">
+          <div id="disqus_empty"></div>
         </div>
       </div>
-
     </div>
-
   </div>
 </div>
-          
-            <div class="article col col-4 col-d-6 col-t-12 grid__post animate">
-  <div class="article__inner">
 
-    
-    <a class="article__image" href="/2024/02/28/Docker%EB%A1%9C-CTFd-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0/">
-      <img class="lazy" data-src="/images/2024-01-29-Docker로-CTFd-구축하기.jpg" alt="Docker로 CTFd 구축하기">
-    </a>
-    
+<script>
+  function load_disqus() {
+    var disqus_shortname = 'lrtk-1',
+      is_disqus_empty = document.getElementById('disqus_empty'),
+      disqus_target = document.getElementById('disqus_thread'),
+      disqus_embed = document.createElement('script'),
+      disqus_hook = (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]);
 
-    <div class="article__content">
+    if (disqus_target && is_disqus_empty) {
+      disqus_embed.type = 'text/javascript';
+      disqus_embed.async = true;
+      disqus_embed.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      disqus_hook.appendChild(disqus_embed);
+      is_disqus_empty.remove();
+    }
+  }
 
-      <div class="article__meta">
-        <span class="article__minutes">
-          
-            
-              2 min read
-          
-          <time class="article__date" datetime="2024-02-28T19:50:00+09:00">2024-02-28 19:50</time>
-        </span>
-      </div>
+  window.addEventListener('scroll', function (e) {
+    var currentScroll = document.scrollingElement.scrollTop;
+    var disqus_target = document.getElementById('disqus_thread');
 
-      <h2 class="article__title">Docker로 CTFd 구축하기</h2>
+    if (disqus_target && (currentScroll > disqus_target.getBoundingClientRect().top - 150)) {
+      load_disqus('disqus_shortname');
+    }
+  }, false);
 
-      <p class="article__excerpt">CTFd는 "Capture The Flag daemon"의 약자로, 정보 보안 기술을 경쟁적으로 연습하고 향상시키기 위한 웹 기반 플랫폼입니다. 정보 보안 관련 대회인 Capture The Flag (CTF)를 운영하고 관리하는 데 사용되며, 문제 생성, 점수 관리, 참가자 진행 상황 추적 등을 지....</p>
-
-      <div class="article__bottom">
-
-        
-        <div class="article__author">
-          <a href="/about/" aria-label="LRTK"><img class="article__author-image lazy" data-src="/images/author.jpeg" alt="LRTK's Picture"></a>
-        </div>
-        
-
-        <div class="article__bottom-meta">
-          
-            <a href="/about/" class="article__author-link">LRTK</a>
-          
-          
-            <span>in</span>
-            <span class="article-tags">
-              
-                <a href="/tag/Korean" class="article__tag">Korean</a>
-              
-                <a href="/tag/CTF" class="article__tag">CTF</a>
-              
-                <a href="/tag/Study" class="article__tag">Study</a>
-              
-                <a href="/tag/ETC" class="article__tag">ETC</a>
-              
-            </span>
-          
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</div>
-          
-        </div>
-      </div>
-    </div>
-  </div>
-</div></main>
+</script>
+<noscript>Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<!-- end comments --> </main>
     <!-- end content -->
 
     <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
@@ -389,7 +580,7 @@
           <span class="article__minutes">
             
             
-              13 min read
+              10 min read
             
           </span>
           <time class="article__date"
