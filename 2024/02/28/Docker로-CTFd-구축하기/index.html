@@ -290,15 +290,19 @@
 
     <div class="post__content">
       <p>CTFd는 “Capture The Flag daemon”의 약자로, 정보 보안 기술을 경쟁적으로 연습하고 향상시키기 위한 웹 기반 플랫폼입니다. 
-정보 보안 관련 대회인 Capture The Flag (CTF)를 운영하고 관리하는 데 사용되며, 문제 생성, 점수 관리, 참가자 진행 상황 추적 등을 지원합니다.</p>
+정보 보안 관련 대회인 Capture The Flag (CTF)를 운영하고 관리하는 데 사용되며, 문제 생성, 점수 관리, 참가자 진행 상황 추적 등을 지원합니다.<br />
+<br /></p>
 
 <h2 id="도커-설치">도커 설치</h2>
 <p>Ubuntu 22.04 LTS으로 환경 구축 후 다운로드를 진행하였습니다.
-인터넷에 Ubuntu 환경에 도커를 설치하는 과정이 매우 상세히 나와있기 때문에 도커 설치는 넘어가도록 하겠습니다.</p>
+인터넷에 Ubuntu 환경에 도커를 설치하는 과정이 매우 상세히 나와있기 때문에 도커 설치는 넘어가도록 하겠습니다.<br />
+<br /></p>
+
 <h3 id="1-ctfd-저장소-가져오기">1. CTFd 저장소 가져오기</h3>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/CTFd/CTFd.git
 <span class="nb">cd </span>CTFd
 </code></pre></div></div>
+<p><br /></p>
 
 <h3 id="2-docker-compose으로-환경-구축">2. Docker Compose으로 환경 구축</h3>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">head</span> <span class="nt">-c</span> 64 /dev/urandom <span class="o">&gt;</span> .ctfd_secret_key
@@ -312,22 +316,26 @@ services:
 			- <span class="nv">SECRET_KEY</span><span class="o">=</span>file:.ctfd_secret_key
 			...
 </code></pre></div></div>
-<p><a href="https://docs.ctfd.io/docs/deployment/installation/#docker">CTFd 공식 문서</a>에서 나온대로 <code class="language-plaintext highlighter-rouge">head -c 64 /dev/urandom &gt; .ctfd_secret_key</code>으로 Flask의 <code class="language-plaintext highlighter-rouge">secret key</code>를 랜덤한 값으로 생성하여 compose 파일에 반영합니다.</p>
+<p><a href="https://docs.ctfd.io/docs/deployment/installation/#docker">CTFd 공식 문서</a>에서 나온대로 <code class="language-plaintext highlighter-rouge">head -c 64 /dev/urandom &gt; .ctfd_secret_key</code>으로 Flask의 <code class="language-plaintext highlighter-rouge">secret key</code>를 랜덤한 값으로 생성하여 compose 파일에 반영합니다.<br />
+<br /></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up <span class="nt">-d</span>
 </code></pre></div></div>
-<p>이후 <code class="language-plaintext highlighter-rouge">localhost:8000</code>으로 접근하여 웹 페이지가 잘 뜨는지 확인합니다.</p>
+<p>이후 <code class="language-plaintext highlighter-rouge">localhost:8000</code>으로 접근하여 웹 페이지가 잘 뜨는지 확인합니다.<br />
+<br /></p>
 
 <h3 id="3-ctfd-plugin-설정">3. CTFd Plugin 설정</h3>
 <p>저는 여러 CTF 사이트들 처럼 컨테이너에 문제 환경을 구성하여 각 사용자 별로 개별 문제 환경을 제공하려고 합니다. 그러긴 위해선 CTFd Plugin을 사용해야 합니다.
-몇 개를 찾아본 결과, <a href="https://github.com/phannhat17/CTFd-Docker-Plugin">phannhat17의 CTFd-Docker-Plugin</a>이 잘 되는 것을 확인하였습니다.</p>
+몇 개를 찾아본 결과, <a href="https://github.com/phannhat17/CTFd-Docker-Plugin">phannhat17의 CTFd-Docker-Plugin</a>이 잘 되는 것을 확인하였습니다.<br />
+<br /></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~
 
 git clone https://github.com/phannhat17/CTFd-Docker-Plugin.git
 <span class="nb">cp</span> <span class="nt">-r</span> ./CTFd-Docker-Plugin ./CTFd/CTFd/plugins/containers
 </code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">CTFd</code> 디렉터리에서 나온 다음, 해당 <code class="language-plaintext highlighter-rouge">CTFd-Docker-Plugin</code> 저장소를 다운로드하여 <code class="language-plaintext highlighter-rouge">CTFd</code>의 <code class="language-plaintext highlighter-rouge">plugins</code> 디렉터리에 복사하였습니다.</p>
+<p><code class="language-plaintext highlighter-rouge">CTFd</code> 디렉터리에서 나온 다음, 해당 <code class="language-plaintext highlighter-rouge">CTFd-Docker-Plugin</code> 저장소를 다운로드하여 <code class="language-plaintext highlighter-rouge">CTFd</code>의 <code class="language-plaintext highlighter-rouge">plugins</code> 디렉터리에 복사하였습니다.<br />
+<br /></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi ./CTFd/requirements.txt
 
@@ -337,7 +345,8 @@ paramiko
 apscheduler
 ...
 </code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">CTFd-Docker-Plugin/requirements.txt</code>에서 사용하는 파이썬 라이브러리를 확인하여 <code class="language-plaintext highlighter-rouge">CTFd/requirements.txt</code>에 추가합니다.</p>
+<p><code class="language-plaintext highlighter-rouge">CTFd-Docker-Plugin/requirements.txt</code>에서 사용하는 파이썬 라이브러리를 확인하여 <code class="language-plaintext highlighter-rouge">CTFd/requirements.txt</code>에 추가합니다.<br />
+<br /></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi ./CTFd/docker-compose.yml
 
@@ -363,7 +372,8 @@ services:
 <span class="nv">Restart</span><span class="o">=</span>always
 ....
 </code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">CTFd</code> 서비스에서 Docker 데몬을 제어하기 위해 compose 파일에 <code class="language-plaintext highlighter-rouge">docker.sock</code>를 추가하였습니다. 또한 systemctl에서 동작 시 TCP 포트 2375와 Unix 소켓을 활성화하는 옵션(<code class="language-plaintext highlighter-rouge"># ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock</code>)을 넣었습니다.</p>
+<p><code class="language-plaintext highlighter-rouge">CTFd</code> 서비스에서 Docker 데몬을 제어하기 위해 compose 파일에 <code class="language-plaintext highlighter-rouge">docker.sock</code>를 추가하였습니다. 또한 systemctl에서 동작 시 TCP 포트 2375와 Unix 소켓을 활성화하는 옵션(<code class="language-plaintext highlighter-rouge"># ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock</code>)을 넣었습니다.<br />
+<br /></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service dockerd restart
 
@@ -372,16 +382,20 @@ docker-compose down
 docker-compose build
 docker-compose up <span class="nt">-d</span>
 </code></pre></div></div>
-<p>설정한 값을 반영하기 위해 docker 데몬 재시작 및 compose를 다시 올립니다.</p>
+<p>설정한 값을 반영하기 위해 docker 데몬 재시작 및 compose를 다시 올립니다.<br />
+<br /></p>
 
 <p><img src="https://i.imgur.com/PMccmRg.png" alt="" />
-이후, CTFd Admin에 접근하여 상단 메뉴의 Plugins &gt; Containers로 이동하여 Settings 버튼을 클릭합니다.</p>
+이후, CTFd Admin에 접근하여 상단 메뉴의 Plugins &gt; Containers로 이동하여 Settings 버튼을 클릭합니다.<br />
+<br /></p>
 
 <p><img src="https://i.imgur.com/igiZBk6.png" alt="" />
-설정에서 Docker Host와 컨테이너 만료 시간, 최대 램/CPU 설정을 하고 Submit를 클릭합니다.</p>
+설정에서 Docker Host와 컨테이너 만료 시간, 최대 램/CPU 설정을 하고 Submit를 클릭합니다.<br />
+<br /></p>
 
 <p><img src="https://i.imgur.com/fCLrgcp.png" alt="" />
-설정이 잘 되었으면, 문제 생성 페이지 내 Image 항목에서 도커에 저장된 Image들을 확인할 수 있습니다.</p>
+설정이 잘 되었으면, 문제 생성 페이지 내 Image 항목에서 도커에 저장된 Image들을 확인할 수 있습니다.<br />
+<br /></p>
 
     </div>
 
