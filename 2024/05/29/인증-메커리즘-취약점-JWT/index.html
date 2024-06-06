@@ -308,11 +308,11 @@ JWT는 <code class="language-plaintext highlighter-rouge">.</code>으로 구분�
 <p>JWT의 헤더는 토큰의 타입과 사용된 서명 또는 암호화 알고리즘에 대한 정보를 포함합니다.</p>
 
 <p><img src="https://i.imgur.com/0hs1XtL.png" alt="" /></p>
-<pre><code class="language-JSON">{
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
   "alg": "HS256",
   "typ": "JWT"
 }
-</code></pre>
+</code></pre></div></div>
 <p>헤더는 일반적으로 <code class="language-plaintext highlighter-rouge">alg</code> 필드와 <code class="language-plaintext highlighter-rouge">typ</code> 필드로 구성된 JSON 객체입니다.</p>
 <ul>
   <li><strong>alg</strong>: 토큰 서명에 사용된 알고리즘을 지정합니다. 예를 들어, HMAC SHA256을 나타내는 “HS256”이 있습니다.</li>
@@ -324,12 +324,12 @@ JWT는 <code class="language-plaintext highlighter-rouge">.</code>으로 구분�
 <p>JWT의 페이로드는 토큰에 포함된 클레임(정보)을 담고 있습니다.</p>
 
 <p><img src="https://i.imgur.com/ZbHkO7J.png" alt="" /></p>
-<pre><code class="language-JSON">{
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
   "name": "HTB",
   "value": 1337,
   "admin": true
 }
-</code></pre>
+</code></pre></div></div>
 <p>페이로드에는 여러 가지 표준 클레임 세트가 포함될 수 있으며, 애플리케이션 요구에 따라 커스텀 클레임도 추가할 수 있습니다.</p>
 
 <p>클레임의 세 가지 유형은 등록된(registered), 공개(public), 그리고 비공개(private)입니다.
@@ -380,19 +380,23 @@ JWT 기반 인증에서는 세션 토큰이 사용자 정보를 포함한 JWT로
 <p>Signature은 발신자를 식별하고 메시지가 변경되지 않았음을 보장하는 데 사용됩니다. Header에 지정된 알고리즘을 사용하여 비밀 키(Secret)로 서명됩니다.
 하지만 서명 검증이 미흡하다면, 페이로드의 데이터가 변조되어도 이를 탐지할 수 없습니다.</p>
 
-<p><img src="https://i.imgur.com/lbfWzG2.png" alt="" />
-예시에 JWT의 Payload로 보이는 부분이 출력되어 있으며, 그 아래 JWT Token 값을 입력할 수 있는 Form을 확인할 수 있음.
+<p><img src="https://i.imgur.com/lbfWzG2.png" alt="" /></p>
+
+<p>예시에 JWT의 Payload로 보이는 부분이 출력되어 있으며, 그 아래 JWT Token 값을 입력할 수 있는 Form을 확인할 수 있음.
 이것을 봤을 때, 위 Payload가 들어있는 JWT Token을 생성하여 제출하라는 것으로 판단이 됩니다.</p>
 
-<p><img src="https://i.imgur.com/QJR2Meh.png" alt="" />
-Request에서 <code class="language-plaintext highlighter-rouge">jwtToken</code>의 값이 빈 값으로 서버에 전달 시 Response에서 <code class="language-plaintext highlighter-rouge">success</code>의 값이 false로 설정되어 클라이언트로 전달됩니다.
+<p><img src="https://i.imgur.com/QJR2Meh.png" alt="" /></p>
+
+<p>Request에서 <code class="language-plaintext highlighter-rouge">jwtToken</code>의 값이 빈 값으로 서버에 전달 시 Response에서 <code class="language-plaintext highlighter-rouge">success</code>의 값이 false로 설정되어 클라이언트로 전달됩니다.
 즉, 인증이 실패하였다는 의미입니다.</p>
 
-<p><img src="https://i.imgur.com/ZoMZbyx.png" alt="" />
-<a href="https://jwt.io/">jwt.io</a>에서 자동으로 생성되는 JWT Token에서 Payload를 문제에서 요구하는 Payload로 변조 후 Signature에 임의로 비밀 키를 기입하여 JWT를 생성합니다.</p>
+<p><img src="https://i.imgur.com/ZoMZbyx.png" alt="" /></p>
 
-<p><img src="https://i.imgur.com/3WWiqeI.png" alt="" />
-생성된 JWT Token을 제출 시 서버에서 JWT의 Signature을 제대로 검증하지 않아, 공격자가 임의로 생성한 JWT에서도 인증이 성공된 모습을 확인할 수 있습니다.</p>
+<p><a href="https://jwt.io/">jwt.io</a>에서 자동으로 생성되는 JWT Token에서 Payload를 문제에서 요구하는 Payload로 변조 후 Signature에 임의로 비밀 키를 기입하여 JWT를 생성합니다.</p>
+
+<p><img src="https://i.imgur.com/3WWiqeI.png" alt="" /></p>
+
+<p>생성된 JWT Token을 제출 시 서버에서 JWT의 Signature을 제대로 검증하지 않아, 공격자가 임의로 생성한 JWT에서도 인증이 성공된 모습을 확인할 수 있습니다.</p>
 
 <h3 id="1-2-none-algorithm-attack">1-2. None Algorithm Attack</h3>
 <p>JWT는 알고리즘을 지정하지 않은 “none” 알고리즘을 지원합니다. None 알고리즘은 JWT에 서명이 포함되지 않으며, 웹 애플리케이션이 서명을 계산하지 않고 이를 수락해야 한다는 것을 의미합니다. Signature가 없기 때문에, 잘못 구성된 경우 웹 애플리케이션은 Signature 검증 없이 토큰을 수락하게 됩니다</p>
