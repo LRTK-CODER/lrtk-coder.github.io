@@ -324,13 +324,12 @@ JWT는 <code class="language-plaintext highlighter-rouge">.</code>으로 구분�
 <p>JWT의 페이로드는 토큰에 포함된 클레임(정보)을 담고 있습니다.</p>
 
 <p><img src="https://i.imgur.com/ZbHkO7J.png" alt="" /></p>
-
-<pre><code class="language-jwt">{
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
   "name": "HTB",
   "value": 1337,
   "admin": true
 }
-</code></pre>
+</code></pre></div></div>
 <p>페이로드에는 여러 가지 표준 클레임 세트가 포함될 수 있으며, 애플리케이션 요구에 따라 커스텀 클레임도 추가할 수 있습니다.</p>
 
 <p>클레임의 세 가지 유형은 등록된(registered), 공개(public), 그리고 비공개(private)입니다.
