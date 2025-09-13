@@ -142,6 +142,8 @@ def deploy():
             cwd=JEKYLL_SOURCE,
             capture_output=True,
             text=True,
+            encoding='utf-8',
+            errors='replace',
             timeout=120
         )
 
@@ -167,7 +169,7 @@ def deploy():
             '--exclude=.git/',            # .git 폴더 보호
             f'{JEKYLL_SITE}/',  # 소스 (끝에 / 중요!)
             f'{GITHUB_PAGES_REPO}/'  # 대상
-        ], capture_output=True, text=True, timeout=60)
+        ], capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=60)
 
         if rsync_result.returncode != 0:
             error_msg = f"rsync 실패: {rsync_result.stderr}"
@@ -188,7 +190,9 @@ def deploy():
             ['git', 'add', '.'],
             cwd=GITHUB_PAGES_REPO,
             capture_output=True,
-            text=True
+            text=True,
+            encoding='utf-8',
+            errors='replace'
         )
 
         if add_result.returncode != 0:
@@ -206,7 +210,9 @@ def deploy():
             ['git', 'commit', '-m', commit_msg],
             cwd=GITHUB_PAGES_REPO,
             capture_output=True,
-            text=True
+            text=True,
+            encoding='utf-8',
+            errors='replace'
         )
 
         # 변경사항이 없으면 커밋 실패는 정상
@@ -228,6 +234,8 @@ def deploy():
             cwd=GITHUB_PAGES_REPO,
             capture_output=True,
             text=True,
+            encoding='utf-8',
+            errors='replace',
             timeout=30
         )
 
