@@ -7,29 +7,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="no-referrer">
 
-  <title>LRTK</title>
-  <meta name='description' content='A place where I share my journey of studying and exploring security. I'm still learning, but I hope these small notes will contribute to building better knowledge in the field.'>
+  <title>D1-02. Amazon Security Hub</title>
+  <meta name='description' content='AWS Security Hub는 AWS 계정 전반에 걸쳐 보안 알림(alerts) 및 보안 상태를 통합적으로 보여주는 중앙 집중식 보안 관리 서비스입니다. 다양한 AWS 서비스 및 파트너 솔루션에서 생성된 보안 관련 결과(findings)를 집계하고, 산업 표준 및 모범 사례에 기...'>
 
   <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="LRTK">
-  <meta property="og:description" content="A place where I share my journey of studying and exploring security. I'm still learning, but I hope these small notes will contribute to building better knowledge in the field.">
-  <meta property="og:url" content="/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="D1-02. Amazon Security Hub">
+  <meta property="og:description" content="AWS Security Hub는 AWS 계정 전반에 걸쳐 보안 알림(alerts) 및 보안 상태를 통합적으로 보여주는 중앙 집중식 보안 관리 서비스입니다. 다양한 AWS 서비스 및 파트너 솔루션에서 생성된 보안 관련 결과(findings)를 집계하고, 산업 표준 및 모범 사례에 기...">
+  <meta property="og:url" content="/2025/09/18/d1-02-amazon-security-hub/">
   <meta property="og:site_name" content="LRTK">
-  <meta property="og:image" content="/images/pages/avatar.jpeg">
+  <meta property="og:image" content="/images/posts/cloudburst_mac.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="ko_KR">
-  
-  
-  
+  <meta property="article:published_time" content="2025-09-18T22:35:00+09:00">
+  <meta property="article:author" content="LRTK">
+  <meta property="article:tag" content="Cloud,AWS,AWS Security">
   <meta property="fb:app_id" content="">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="LRTK">
-  <meta name="twitter:description" content="A place where I share my journey of studying and exploring security. I'm still learning, but I hope these small notes will contribute to building better knowledge in the field.">
-  <meta name="twitter:image" content="/images/pages/avatar.jpeg">
+  <meta name="twitter:title" content="D1-02. Amazon Security Hub">
+  <meta name="twitter:description" content="AWS Security Hub는 AWS 계정 전반에 걸쳐 보안 알림(alerts) 및 보안 상태를 통합적으로 보여주는 중앙 집중식 보안 관리 서비스입니다. 다양한 AWS 서비스 및 파트너 솔루션에서 생성된 보안 관련 결과(findings)를 집계하고, 산업 표준 및 모범 사례에 기...">
+  <meta name="twitter:image" content="/images/posts/cloudburst_mac.png">
   <meta name="twitter:site" content="@">
   <meta name="twitter:creator" content="@">
 
@@ -39,7 +39,7 @@
   <meta name="google-site-verification" content="">
   <meta name="naver-site-verification" content="">
 
-  <link rel="canonical" href="/">
+  <link rel="canonical" href="/2025/09/18/d1-02-amazon-security-hub/">
   <link rel="alternate" type="application/rss+xml" title="LRTK" href="/feed.xml">
   <link rel="shortcut icon" type="image/png" href="favicon.ico">
 
@@ -67,25 +67,68 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
+  "@type": "BlogPosting",
   
-  "name": "LRTK",
-  "description": "A place where I share my journey of studying and exploring security. I'm still learning, but I hope these small notes will contribute to building better knowledge in the field.",
-  "url": "",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "/search?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  },
+  "headline": "D1-02. Amazon Security Hub",
+  "description": "AWS Security Hub는 AWS 계정 전반에 걸쳐 보안 알림(alerts) 및 보안 상태를 통합적으로 보여주는 중앙 집중식 보안 관리 서비스입니다. 다양한 AWS 서비스 및 파트너 솔루션에서 생성된 보안 관련 결과(findings)를 집계하고, 산업 표준 및 모범 사례에 기...",
+  "image": "/images/posts/cloudburst_mac.png",
+  "datePublished": "2025-09-18T22:35:00+09:00",
+  "dateModified": "2025-09-18T22:35:00+09:00",
   "author": {
     "@type": "Person",
     "name": "LRTK",
     "url": "/about/"
-  }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "LRTK",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/pages/avatar.jpeg"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/2025/09/18/d1-02-amazon-security-hub/"
+  },
+  
+  "keywords": [
+    
+    "Cloud",
+    
+    "AWS",
+    
+    "AWS Security"
+    
+  ],
+  
+  "url": "/2025/09/18/d1-02-amazon-security-hub/"
   
 }
 </script>
 
+
+<!-- Article Breadcrumb -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": ""
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "D1-02. Amazon Security Hub",
+      "item": "/2025/09/18/d1-02-amazon-security-hub/"
+    }
+  ]
+}
+</script>
 
 </head>
 
@@ -96,7 +139,7 @@
   
 
 <!-- begin header -->
-<header class="header header--top">
+<header class="header ">
   <div class="container">
     <div class="row">
       <div class="header__inner col col-12">
@@ -874,233 +917,313 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
 
   <!-- begin content -->
   <main class="content" aria-label="Content">
-    <!-- begin hero -->
-
-<section class="hero">
-  <div class="hero__inner">
-    <div class="hero__image">
+    <div class="post-head">
+  <div class="container">
+    <div class="row">
       
+      <div class="col col-4 col-t-12">
+        <div class="image-box">
+          <img class="post-image lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-02. Amazon Security Hub">
+        </div>
+      </div>
       
-      
-        <img class="hero__gif" src="/images/pages/hero1.gif" alt="One Step a Day">
-      
-    </div>
-    <div class="hero__content">
-      
-        <h1 class="hero__title" 
-            data-type-text="One Step a Day|Security Explorer|Learning Journey|Growth Path"
-            data-type-speed="80"
-            data-delete-speed="40"
-            data-pause-duration="2000">One Step a Day</h1>
-      
-      <p class="hero__desc">A place where I share my journey of studying and exploring security.</br> I'm still learning, but I hope these small notes will contribute to building better knowledge in the field.</p>
+  
+      <div class="col col-8 col-t-12">
+        <div class="post-head__box">
+        
+          <div class="post__meta">
+            <span class="post__minutes">
+              
+              
+                3 min read
+              
+              <time class="post__date"
+                datetime="2025-09-18T22:35:00+09:00">Sep 18, 2025</time>
+            </span>
+          </div>
+        
+          <h2 class="post__title">D1-02. Amazon Security Hub</h2>
+        
+          <div class="post__bottom">
+        
+            <div class="post__author">
+              <a href="/about/" aria-label="LRTK"><img class="post__author-image"
+                  src="/images/pages/avatar.jpeg" alt="LRTK's Picture"></a>
+            </div>
+        
+            <div class="post__bottom-meta">
+              <a href="/about/" class="post__author-link">LRTK</a>
+              
+              <span>in</span>
+              <span class="post-tags">
+                
+                <a href="/tag/Cloud" class="post__tag">Cloud</a>
+                
+                <a href="/tag/AWS" class="post__tag">AWS</a>
+                
+                <a href="/tag/AWS Security" class="post__tag">AWS Security</a>
+                
+              </span>
+              
+            </div>
+          </div>
+        
+        </div>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- begin hero -->
+<!-- begin post -->
+<div class="container">
+  <article class="post animate">
+
+    <div class="post__content">
+      <h1>1. Amazon Security Hub 개요</h1>
+<p>AWS Security Hub는 AWS 계정 전반에 걸쳐 보안 알림(alerts) 및 보안 상태를 통합적으로 보여주는 중앙 집중식 보안 관리 서비스입니다. 다양한 AWS 서비스 및 파트너 솔루션에서 생성된 보안 관련 결과(findings)를 집계하고, 산업 표준 및 모범 사례에 기반한 자동화된 보안 검사를 수행하여 전반적인 보안 태세 및 컴플라이언스 상태를 가시화하고 개선을 돕습니다.</p>
+<p><img src="https://i.imgur.com/dfBIIw2.png" alt="" /></p>
+<h2>1-1. 특징</h2>
+<ul>
+<li><strong>중앙 집중식 보안 대시보드</strong>
+<ul>
+<li>여러 AWS 계정의 보안 상태 및 컴플라이언스 준수 현황을 대시보드에서 파악 가능</li>
+<li>대시보드를 통해 보안 팀은 신속하게 문제 대응 가능</li>
+</ul>
+</li>
+<li><strong>결과(Findings) 집계</strong>
+<ul>
+<li>AWS의 다양한 보안 서비스(GuardDuty, Inspector, Macie, IAM Access Analyzer, Config 등) 및 서드파티 보안 솔루션에서 생성된 보안 관련 결과 수집</li>
+<li>수집된 데이터를 정규화된 형식으로 통합</li>
+</ul>
+</li>
+<li><strong>자동화된 보안 검사 및 컴플라이언스 확인</strong><br />
+<img src="https://i.imgur.com/5fdpDxj.png" alt="" />
+<ul>
+<li>보안 표준 준수 여부
+<ul>
+<li>CIS AWS Foundations Benchmark, AWS Foundational Security Best Practices, PCI DSS 등의 산업 표준 및 AWS 모범 사례 기반으로 계정 자동 검사하고 규정 준수 여부 평가</li>
+</ul>
+</li>
+<li>Config 연동 필수
+<ul>
+<li>Security Hub 작동하려면 <strong>AWS Config 서비스 활성화</strong> 필요</li>
+<li>Config는 AWS 리소스의 구성을 지속적인 기록과 변경 사항 추적하여 Security Hub가 보안 검사에 필요한 데이터 제공</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>30일 무료 평가판</strong>: 초기 30일간 무료로 서비스 사용 가능</li>
+</ul>
+<h2>1-2. 주요 기능</h2>
+<table>
+<thead>
+<tr>
+<th>구성 요소</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Security Findings</td>
+<td>다양한 보안 서비스에서 수집한 이슈 항목 (ASFF 포맷)</td>
+</tr>
+<tr>
+<td>Insights</td>
+<td>특정 보안 주제에 대한 Finding 묶음 (자동/사용자 정의 가능)</td>
+</tr>
+<tr>
+<td>Security Standards</td>
+<td>CIS, PCI DSS, AWS Best Practices 등 자동 점검 기준</td>
+</tr>
+<tr>
+<td>Custom Actions</td>
+<td>사용자 정의 대응 트리거 설정, EventBridge와 연동</td>
+</tr>
+<tr>
+<td>Cross-Region Aggregation</td>
+<td>여러 리전의 데이터를 중앙 리전에서 통합 조회</td>
+</tr>
+<tr>
+<td>Organizations 통합</td>
+<td>조직 내 모든 계정을 중앙에서 일괄 관리 가능</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>2. 동작 프로세스</h1>
+<h2>2-1. 다중 계정 지원</h2>
+<p>여러 AWS 계정의 보안 결과를 한 곳으로 모아 관리할 수 있음.</p>
+<p><img src="https://i.imgur.com/PUtxOX5.png" alt="" /></p>
+<h2>2-2. 다양한 소스에서 결과 수집</h2>
+<h3>1). AWS 보안 관련 네이티브 서비스</h3>
+<ul>
+<li><strong>Amazon GuardDuty</strong> – 위협 탐지 서비스 (악성 활동/비정상 동작 탐지)</li>
+<li><strong>Amazon Inspector</strong> – EC2, ECR, Lambda 등 취약점 관리 및 보안 평가</li>
+<li><strong>Amazon Macie</strong> – 민감 데이터(PII 등) 식별 및 보호</li>
+<li><strong>IAM Access Analyzer</strong> – 리소스 외부 액세스 정책 분석</li>
+<li><strong>AWS Firewall Manager</strong> – WAF, Shield, SG 정책 관리</li>
+<li><strong>AWS Config</strong> – 리소스 구성 규정 준수 여부 평가 (Security Hub 필수 전제 조건)</li>
+<li><strong>AWS Systems Manager</strong> – 패치 상태 등 보안 관련 인사이트 제공</li>
+<li><strong>AWS Health</strong> – AWS 서비스 상태 및 이벤트 관련 알림</li>
+</ul>
+<h3>2). 파트너 솔루션 (3rd party)</h3>
+<ul>
+<li>수십 개 이상의 <strong>AWS Security Hub Partner Solutions</strong> → Marketplace를 통해 Security Hub와 연계 가능</li>
+</ul>
+<h2>3). 자동 검사 및 Finding 생성</h2>
+<ul>
+<li><strong>AWS Audit Manager</strong> – 규제/컴플라이언스 평가 항목 자동 연계</li>
+<li><strong>AWS Detective</strong> – GuardDuty 결과 심화 조사 (Security Hub findings로 연결)</li>
+<li><strong>Amazon Verified Access</strong> – 애플리케이션 접근 제어 결과</li>
+<li><strong>Amazon Verified Permissions</strong> – 세분화된 권한 제어 관련 findings</li>
+</ul>
+<h2>4). Amazon EventBridge 연동</h2>
+<p>새로운 Finding이 생성되거나 기존 Finding이 업데이트되면, Amazon EventBridge 이벤트 발생</p>
+<ul>
+<li>
+<p>Findings → EventBridge 이벤트로 Lambda 실행<br />
+<img src="https://i.imgur.com/eRT0vne.png" alt="" /></p>
+</li>
+<li>
+<p>Findings → EventBridge 이벤트로 SNS 알림<br />
+<img src="https://i.imgur.com/Q2KSwqe.png" alt="" /></p>
+</li>
+</ul>
+<h3>5). 심화 조사</h3>
+<p>특정 Finding에 대한 심층적인 조사가 필요할 경우, Amazon Detective와 연동하여 해당 보안 문제의 발생 원인과 연관된 활동들을 신속한 분석과 시각화 가능</p>
+<p><img src="https://i.imgur.com/trNKYtn.png" alt="" /></p>
+<hr />
+<h1>3. 요금 체계</h1>
+<p>Security Hub는 두 가지 주요 요소에 따라 요금이 부과됨.</p>
+<ul>
+<li><strong>보안 검사당 요금 (Per Check):</strong> 보안 표준에 따라 수행되는 자동화된 보안 검사의 횟수에 비례하여 요금 발생</li>
+<li><strong>수집된 결과 이벤트당 요금 (Per Ingested Event):</strong> GuardDuty, Inspector 등 다른 서비스로부터 Security Hub로 수집되는 결과 이벤트의 양에 따라 요금 발생</li>
+</ul>
+
+    </div>
+
+
+    <div class="post__navigation">
+      
+      <a class="prev" href="/2025/09/17/d1-01-amazon-guardduty/">
+        <img class="post__nav-image lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-01. Amazon GuardDuty">
+        <div class="post__nav-box">
+          <div class="post__nav post__nav__prev"><i class="ion ion-md-arrow-round-back"></i> Publicación Anterior</div>
+          <h4 class="post__nav__title">D1-01. Amazon GuardDuty</h4>
+        </div>
+      </a>
+      
+      
+    </div>
+
+  </article>
+</div>
+<!-- end post -->
+
+
+
+
+
+
 
 <div class="container">
-  <div class="row">
-    <div class="col col-12">
-      <div class="container__inner">
-        <div class="row grid">
+  <div class="related-posts is-related">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <h3 class="related-title">You might also like</h3>
+          <div class="row grid">
+
           
             
-              <div class="article col col-6 col-t-12 grid__post animate article--big">
-  <div class="article__inner">
-
-    
-    <a class="article__image" href="/2025/09/18/d1-02-amazon-security-hub/">
-      <img class="lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-02. Amazon Security Hub">
-    </a>
-    
-
-    <div class="article__content">
-
-      <div class="article__meta">
-        <span class="article__minutes">
-          
             
-              3 min para leer
-          
-          <time class="article__date" datetime="2025-09-18T22:35:00+09:00">Sep 18, 2025</time>
-        </span>
-      </div>
-
-      <h2 class="article__title">D1-02. Amazon Security Hub</h2>
-
-      <p class="article__excerpt">AWS Security Hub는 AWS 계정 전반에 걸쳐 보안 알림(alerts) 및 보안 상태를 통합적으로 보여주는 중앙 집중식 보안 관리 서비스입니다. 다양한 AWS 서비스 및 파트너 솔루션에서 생성된 보안 관련 결과(findings)를 집계하고, 산업 표준 및 모범 사례에 기반한 자동화된 보안 검사를 수행하여 전반적인 보안 태세 및 컴플라이언스 상태를 가시화하고 개선을 돕습니다.</p>
-
-      <div class="article__bottom">
-
-        
-        <div class="article__author">
-          <a href="/about/" aria-label="LRTK"><img class="article__author-image lazy" data-src="/images/pages/avatar.jpeg" alt="LRTK's Picture"></a>
-        </div>
-        
-
-        <div class="article__bottom-meta">
-          
-            <a href="/about/" class="article__author-link">LRTK</a>
-          
-          
-            <span>in</span>
-            <span class="article-tags">
-              
-                <a href="/tag/cloud" class="article__tag">Cloud</a>
-              
-                <a href="/tag/aws" class="article__tag">AWS</a>
-              
-                <a href="/tag/aws-security" class="article__tag">AWS Security</a>
-              
-            </span>
-          
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</div>
 
             
-              <div class="article col col-6 col-t-12 grid__post animate article--big">
-  <div class="article__inner">
-
-    
-    <a class="article__image" href="/2025/09/17/d1-01-amazon-guardduty/">
-      <img class="lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-01. Amazon GuardDuty">
-    </a>
-    
-
-    <div class="article__content">
-
-      <div class="article__meta">
-        <span class="article__minutes">
-          
-            
-              2 min para leer
-          
-          <time class="article__date" datetime="2025-09-17T02:10:00+09:00">Sep 17, 2025</time>
-        </span>
-      </div>
-
-      <h2 class="article__title">D1-01. Amazon GuardDuty</h2>
-
-      <p class="article__excerpt">Amazon GuardDuty는 다양한 AWS 서비스의 로그 데이터를 ML 기반으로 분석하여 지능적으로 위협을 탐지하고, EventBridge를 통한 유연한 자동화 대응 기능을 제공하는 AWS 클라우드 보안의 핵심 서비스입니다.</p>
-
-      <div class="article__bottom">
-
-        
-        <div class="article__author">
-          <a href="/about/" aria-label="LRTK"><img class="article__author-image lazy" data-src="/images/pages/avatar.jpeg" alt="LRTK's Picture"></a>
-        </div>
-        
-
-        <div class="article__bottom-meta">
-          
-            <a href="/about/" class="article__author-link">LRTK</a>
-          
-          
-            <span>in</span>
-            <span class="article-tags">
-              
-                <a href="/tag/cloud" class="article__tag">Cloud</a>
-              
-                <a href="/tag/aws" class="article__tag">AWS</a>
-              
-                <a href="/tag/aws-security" class="article__tag">AWS Security</a>
-              
-            </span>
-          
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</div>
 
             
-              <div class="article col col-4 col-d-6 col-t-12 grid__post animate">
-  <div class="article__inner">
-
-    
-    <a class="article__image" href="/2025/09/10/adf-01-active-directory-%EA%B0%9C%EC%9A%94/">
-      <img class="lazy" data-src="/images/posts/space.png" alt="ADF-01. Active Directory 개요">
-    </a>
-    
-
-    <div class="article__content">
-
-      <div class="article__meta">
-        <span class="article__minutes">
-          
             
-              2 min para leer
-          
-          <time class="article__date" datetime="2025-09-10T02:42:00+09:00">Sep 10, 2025</time>
-        </span>
-      </div>
-
-      <h2 class="article__title">ADF-01. Active Directory 개요</h2>
-
-      <p class="article__excerpt">Active Directory(AD)의 기본 개념과 역할, 확장성 및 활용 방안, 그리고 역사적 발전 과정을 정리한 글입니다.  
-AD가 왜 Windows 네트워크 환경에서 중요한 관리 체계로 자리 잡았는지, 어떤 보안·관리 기능을 제공하는지, 그리고 시간이 지나면서 어떻게 발전해왔는지를 살펴봅니다.</p>
-
-      <div class="article__bottom">
-
-        
-        <div class="article__author">
-          <a href="/about/" aria-label="LRTK"><img class="article__author-image lazy" data-src="/images/pages/avatar.jpeg" alt="LRTK's Picture"></a>
-        </div>
-        
-
-        <div class="article__bottom-meta">
-          
-            <a href="/about/" class="article__author-link">LRTK</a>
-          
-          
-            <span>in</span>
-            <span class="article-tags">
-              
-                <a href="/tag/active-directory" class="article__tag">Active Directory</a>
-              
-                <a href="/tag/active-directory-fundamentals" class="article__tag">Active Directory Fundamentals</a>
-              
-            </span>
-          
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</div>
+            
+            
 
             
-          
+
+            
+
+            <div class="article col col-4 col-d-6 col-t-12 grid__post">
+              <div class="article__inner">
+
+                
+                <a class="article__image" href="/2025/09/17/d1-01-amazon-guardduty/">
+                  <img class="lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-01. Amazon GuardDuty">
+                </a>
+                
+
+                <div class="article__content">
+
+                  <div class="article__meta">
+                    <span class="article__minutes">
+                      
+                      
+                        2 min read
+                      
+                      <time class="article__date"
+                        datetime="2025-09-17T02:10:00+09:00">Sep 17, 2025</time>
+                    </span>
+                  </div>
+
+                  <h2 class="article__title">D1-01. Amazon GuardDuty</h2>
+
+                  <p class="article__excerpt">Amazon GuardDuty는 다양한 AWS 서비스의 로그 데이터를 ML 기반으로 분석하여 지능적으로 위협을 탐지하고, EventBridge를 통한 유연한 자동화 대응 기능을 제공하는 AWS 클라우드 보안의 핵심 서비스입니다.</p>
+
+                  <div class="article__bottom">
+
+                    
+                    <div class="article__author">
+                      <a href="/about/" aria-label="LRTK"><img class="article__author-image lazy" data-src="/images/pages/avatar.jpeg" alt="LRTK's Picture"></a>
+                    </div>
+                    
+
+                    <div class="article__bottom-meta">
+                      
+                        <a href="/about/" class="article__author-link">LRTK</a>
+                      
+                      
+                      <span>in</span>
+                      <span class="article-tags">
+                        
+                          <a href="/tag/cloud" class="article__tag">Cloud</a>
+                        
+                          <a href="/tag/aws" class="article__tag">AWS</a>
+                        
+                          <a href="/tag/aws-security" class="article__tag">AWS Security</a>
+                        
+                      </span>
+                      
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+            
+                
+              
+            
+            
+            
+
+            
+
+            
+            
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<div class="container">
-  <div class="row">
-    <div class="col col-12 load-more">
-      
-      
-      
-    </div>
-  </div>
-</div>
-
-
-
-
-
 
 
 
@@ -1235,7 +1358,7 @@ AD가 왜 Windows 네트워크 환경에서 중요한 관리 체계로 자리 �
   var base_url = "",
     pagination_next_url = base_url + '/page2',
     pagination_next_page_number = '',
-    pagination_available_pages_number = '1';
+    pagination_available_pages_number = '';
 </script>
 </body>
 
