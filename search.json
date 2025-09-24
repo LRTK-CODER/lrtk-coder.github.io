@@ -1,4 +1,15 @@
 [{
+      "title": "D1-03. Amazon Detective",
+      "category": "",
+      "tags": "AWS, AWS Security",
+      "url": "/2025/09/25/d1-03-amazon-detective/",
+      "date": "Sep 25, 2025",
+      "excerpt": "Amazon Detective는 Findings의 근본 원인을 분석하고 잠재적인 보안 문제의 세부 사항을 빠르게 조사하는 데 도움을 주는 관리형 보안 서비스입니다. GuardDuty, VPC Flow Logs, CloudTrail Logs 등 다양한 소스에서 데이터를 자동으로...",
+      "content": "GuardDuty와 연계되어 보안 이벤트의 심층 조사(In-Depth Investigation) 담당 로그 상관 분석, 공격 경로 및 영향 범위 파악 시험 포인트: GuardDuty → Detective → 조사 &amp; 대응 1. Amazon Detective 개요 Amazon Detective는 Findings의 근본 원인을 분석하고 잠재적인 보안 문제의 세부 사항을 빠르게 조사하는 데 도움을 주는 관리형 보안 서비스입니다. GuardDuty, VPC Flow Logs, CloudTrail Logs 등 다양한 소스에서 데이터를 자동으로 수집하여 머신러닝과 그래프를 사용하여 이들 간의 연관성을 시각화합니다. 특징 자동화된 데이터 수집 및 분석 GuardDuty, CloudTrail, VPC Flow Logs 등 여러 AWS 서비스에서 생성되는 보안 관련 데이터 자동 수집하여 통합하고 분석 시각화된 그래프 수집된 데이터를 바탕으로 계정, 사용자, 역할, EC2 인스턴스, IP 주소 등의 엔터티 간의 복잡한 상호작용 및 동작을 시각적인 그래프 제공 원인 파악 및 컨텍스트 제공 특정 보안 이벤트(예: GuardDuty Finding)가 발생했을 때, 해당 이벤트의 원인과 관련 활동을 추적하여 보안 분석가에게 필요한 모든 컨텍스트 제공 ML 기반 분석 머신러닝 기반 패턴 분석을 통해 빠르게 원인 파악하여, “True Positive”와 “False Positive”를 식별에 도움을 줌",
+      "image": "/images/posts/cloudburst_mac.png",
+      "author": "LRTK",
+      "article": "<div class='article col col-4 col-d-6 col-t-12 grid__post animate'><div class='article__inner'><a class='article__image' href='/2025/09/25/d1-03-amazon-detective/'><img src='/images/posts/cloudburst_mac.png' alt='D1-03. Amazon Detective' loading='lazy'></a><div class='article__content'><div class='article__meta'><span class='article__minutes'>1 min read<time class='article__date' datetime='2025-09-25T00:31:00+09:00'>Sep 25, 2025</time></span></div><h2 class='article__title'>D1-03. Amazon Detective</h2><p class='article__excerpt'>Amazon Detective는 Findings의 근본 원인을 분석하고 잠재적인 보안 문제의 세부 사항을 빠르게 조사하는 데 도움을 주는 관리형 보안 서비스입니다. GuardDuty, VPC Flow Logs, CloudTrail Logs...</p><div class='article__bottom'><div class='article__author'><a href='/about/' aria-label='LRTK'><img class='article__author-image' src='/images/pages/avatar.jpeg' alt='LRTK의 사진' loading='lazy'></a></div><div class='article__bottom-meta'><a href='/about/' class='article__author-link'>LRTK</a><span> in </span><span class='article-tags'><a href='/tag/AWS' class='article__tag'>AWS</a><a href='/tag/AWS Security' class='article__tag'>AWS Security</a></span></div></div></div></div></div>"
+    },{
       "title": "D1-02. Amazon Security Hub",
       "category": "",
       "tags": "Cloud, AWS, AWS Security",
