@@ -7,29 +7,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="no-referrer">
 
-  <title>ADF-01. Active Directory 개요</title>
-  <meta name='description' content='Active Directory(AD)의 기본 개념과 역할, 확장성 및 활용 방안, 그리고 역사적 발전 과정을 정리한 글입니다.  AD가 왜 Windows 네트워크 환경에서 중요한 관리 체계로 자리 잡았는지, 어떤 보안·관리 기능을 제공하는지, 그리고 시간이 지나면서 어떻게 발전해왔...'>
+  <title>D1-08. IAM Security Tools</title>
+  <meta name='description' content='IAM(Identity and Access Management) 은 AWS 리소스 접근을 인증·인가하는 핵심 서비스로,사용자·그룹·역할·정책을 통해 권한을 제어하고 MFA, Access Key, Role 기반 인증을 지원합니다.'>
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="article">
-  <meta property="og:title" content="ADF-01. Active Directory 개요">
-  <meta property="og:description" content="Active Directory(AD)의 기본 개념과 역할, 확장성 및 활용 방안, 그리고 역사적 발전 과정을 정리한 글입니다.  AD가 왜 Windows 네트워크 환경에서 중요한 관리 체계로 자리 잡았는지, 어떤 보안·관리 기능을 제공하는지, 그리고 시간이 지나면서 어떻게 발전해왔...">
-  <meta property="og:url" content="/2025/09/10/adf-01-active-directory-%EA%B0%9C%EC%9A%94/">
+  <meta property="og:title" content="D1-08. IAM Security Tools">
+  <meta property="og:description" content="IAM(Identity and Access Management) 은 AWS 리소스 접근을 인증·인가하는 핵심 서비스로,사용자·그룹·역할·정책을 통해 권한을 제어하고 MFA, Access Key, Role 기반 인증을 지원합니다.">
+  <meta property="og:url" content="/2025/10/07/d1-08-iam-security-tools/">
   <meta property="og:site_name" content="LRTK">
-  <meta property="og:image" content="/images/posts/space.png">
+  <meta property="og:image" content="/images/posts/cloudburst_mac.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="ko_KR">
-  <meta property="article:published_time" content="2025-09-10T02:42:00+09:00">
+  <meta property="article:published_time" content="2025-10-07T15:24:00+00:00">
   <meta property="article:author" content="LRTK">
-  <meta property="article:tag" content="Active Directory,Active Directory Fundamentals">
+  <meta property="article:tag" content="Cloud,AWS,AWS Security">
   <meta property="fb:app_id" content="">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ADF-01. Active Directory 개요">
-  <meta name="twitter:description" content="Active Directory(AD)의 기본 개념과 역할, 확장성 및 활용 방안, 그리고 역사적 발전 과정을 정리한 글입니다.  AD가 왜 Windows 네트워크 환경에서 중요한 관리 체계로 자리 잡았는지, 어떤 보안·관리 기능을 제공하는지, 그리고 시간이 지나면서 어떻게 발전해왔...">
-  <meta name="twitter:image" content="/images/posts/space.png">
+  <meta name="twitter:title" content="D1-08. IAM Security Tools">
+  <meta name="twitter:description" content="IAM(Identity and Access Management) 은 AWS 리소스 접근을 인증·인가하는 핵심 서비스로,사용자·그룹·역할·정책을 통해 권한을 제어하고 MFA, Access Key, Role 기반 인증을 지원합니다.">
+  <meta name="twitter:image" content="/images/posts/cloudburst_mac.png">
   <meta name="twitter:site" content="@">
   <meta name="twitter:creator" content="@">
 
@@ -39,7 +39,7 @@
   <meta name="google-site-verification" content="">
   <meta name="naver-site-verification" content="">
 
-  <link rel="canonical" href="/2025/09/10/adf-01-active-directory-%EA%B0%9C%EC%9A%94/">
+  <link rel="canonical" href="/2025/10/07/d1-08-iam-security-tools/">
   <link rel="alternate" type="application/rss+xml" title="LRTK" href="/feed.xml">
   <link rel="shortcut icon" type="image/png" href="favicon.ico">
 
@@ -69,11 +69,11 @@
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   
-  "headline": "ADF-01. Active Directory 개요",
-  "description": "Active Directory(AD)의 기본 개념과 역할, 확장성 및 활용 방안, 그리고 역사적 발전 과정을 정리한 글입니다.  AD가 왜 Windows 네트워크 환경에서 중요한 관리 체계로 자리 잡았는지, 어떤 보안·관리 기능을 제공하는지, 그리고 시간이 지나면서 어떻게 발전해왔...",
-  "image": "/images/posts/space.png",
-  "datePublished": "2025-09-10T02:42:00+09:00",
-  "dateModified": "2025-09-10T02:42:00+09:00",
+  "headline": "D1-08. IAM Security Tools",
+  "description": "IAM(Identity and Access Management) 은 AWS 리소스 접근을 인증·인가하는 핵심 서비스로,사용자·그룹·역할·정책을 통해 권한을 제어하고 MFA, Access Key, Role 기반 인증을 지원합니다.",
+  "image": "/images/posts/cloudburst_mac.png",
+  "datePublished": "2025-10-07T15:24:00+00:00",
+  "dateModified": "2025-10-07T15:24:00+00:00",
   "author": {
     "@type": "Person",
     "name": "LRTK",
@@ -89,18 +89,20 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "/2025/09/10/adf-01-active-directory-%EA%B0%9C%EC%9A%94/"
+    "@id": "/2025/10/07/d1-08-iam-security-tools/"
   },
   
   "keywords": [
     
-    "Active Directory",
+    "Cloud",
     
-    "Active Directory Fundamentals"
+    "AWS",
+    
+    "AWS Security"
     
   ],
   
-  "url": "/2025/09/10/adf-01-active-directory-%EA%B0%9C%EC%9A%94/"
+  "url": "/2025/10/07/d1-08-iam-security-tools/"
   
 }
 </script>
@@ -121,8 +123,8 @@
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "ADF-01. Active Directory 개요",
-      "item": "/2025/09/10/adf-01-active-directory-%EA%B0%9C%EC%9A%94/"
+      "name": "D1-08. IAM Security Tools",
+      "item": "/2025/10/07/d1-08-iam-security-tools/"
     }
   ]
 }
@@ -921,7 +923,7 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
       
       <div class="col col-4 col-t-12">
         <div class="image-box">
-          <img class="post-image lazy" data-src="/images/posts/space.png" alt="ADF-01. Active Directory 개요">
+          <img class="post-image lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-08. IAM Security Tools">
         </div>
       </div>
       
@@ -933,14 +935,14 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
             <span class="post__minutes">
               
               
-                2 min read
+                1 min read
               
               <time class="post__date"
-                datetime="2025-09-10T02:42:00+09:00">Sep 10, 2025</time>
+                datetime="2025-10-07T15:24:00+00:00">Oct 7, 2025</time>
             </span>
           </div>
         
-          <h2 class="post__title">ADF-01. Active Directory 개요</h2>
+          <h2 class="post__title">D1-08. IAM Security Tools</h2>
         
           <div class="post__bottom">
         
@@ -955,9 +957,11 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
               <span>in</span>
               <span class="post-tags">
                 
-                <a href="/tag/Active Directory" class="post__tag">Active Directory</a>
+                <a href="/tag/Cloud" class="post__tag">Cloud</a>
                 
-                <a href="/tag/Active Directory Fundamentals" class="post__tag">Active Directory Fundamentals</a>
+                <a href="/tag/AWS" class="post__tag">AWS</a>
+                
+                <a href="/tag/AWS Security" class="post__tag">AWS Security</a>
                 
               </span>
               
@@ -975,60 +979,67 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
   <article class="post animate">
 
     <div class="post__content">
-      <h1>Active Directory란?</h1>
-<blockquote>
-<p><strong>디렉터리 서비스</strong>: Windows 네트워크 환경을 위한 핵심 관리 체계<br />
-<strong>중앙 관리</strong>: 사용자, 컴퓨터, 그룹, 정책 등 리소스를 통합 관리<br />
-<strong>보안 기능</strong>: 인증 및 권한 부여를 통해 접근 통제 수행<br />
-<strong>데이터베이스 성격</strong>: 권한과 무관하게 기본적으로 열람 가능한 구조</p>
-</blockquote>
-<p>Active Directory는 Windows 네트워크 환경을 위한 디렉터리 서비스입니다.</p>
-<p>이 서비스는 사용자, 컴퓨터, 그룹, 장치, 정책 등 조직의 다양한 리소스를 중앙에서 관리할 수 있도록 설계되었습니다.<br />
-또한 인증과 권한 부여 기능을 제공하여 네트워크 보안과 운영의 핵심 역할을 담당합니다.</p>
-<p>AD는 본질적으로 권한 수준과 관계없이 대부분의 사용자가 열람 가능한 읽기 전용 데이터베이스의 성격을 지니고 있습니다.</p>
-<h2>Active Directory 활용과 확장성</h2>
-<blockquote>
-<p><strong>확장성</strong>: 도메인당 수백만 개 객체 지원 → 소규모부터 대규모 기업까지 안정적 운영<br />
-<strong>보급률</strong>: Fortune 500 기업의 95% 이상 사용 → 글로벌 기업 표준<br />
-<strong>중앙 관리</strong>: 그룹 정책, 트러스트 관계, 자원 접근 제어 제공<br />
-<strong>효율성</strong>: 관리자는 인프라를 통제, 사용자는 정보 활용 용이<br />
-<strong>유연성</strong>: 조직 성장 시 도메인·조직 단위 확장에 대응 가능</p>
-</blockquote>
-<p>Active Directory는 <strong>도메인당 수백만 개의 객체를 지원</strong>할 수 있을 만큼 확장성이 뛰어나 대규모 기업 환경에서도 안정적으로 동작합니다. 실제로 <strong>Fortune 500 기업의 95% 이상이 AD를 운영</strong>하고 있으며, 이로 인해 AD는 사실상 글로벌 기업 표준으로 자리 잡았습니다.</p>
-<p>또한 AD는 단순히 사용자 계정을 관리하는 수준을 넘어, 그룹 정책을 통한 시스템 통제, 트러스트(Trust) 관계를 활용한 도메인 간 연동, 그리고 자원 접근 제어와 같은 기능까지 제공합니다. 이런 특성 덕분에 관리자는 <strong>조직의 인프라를 중앙에서 효율적으로 통제</strong>할 수 있고, <strong>사용자는 필요한 정보를 손쉽게 검색하고 활용</strong>할 수 있습니다.</p>
-<p>AD는 조직이 성장하면서 <strong>도메인을 확장하거나 새로운 조직 단위를 추가하더라도 유연하게 대응</strong>할 수 있습니다.<br />
-따라서 소규모 환경부터 초대형 글로벌 네트워크까지 폭넓게 활용할 수 있는 관리 프레임워크로 평가받습니다.</p>
-<h2>Active Directory의 역사</h2>
-<blockquote>
-<p>기반: LDAP(1971), X.500 표준<br />
-도입: 2000년 Windows Server 2000과 함께 공개<br />
-<!-- raw HTML omitted --><br />
-[ 주요 발전 ]</p>
-<ol>
-<li>Windows Server 2003 → Forest 기능 추가</li>
-<li>Windows Server 2008 → ADFS(Single Sign-On) 도입</li>
-<li>Windows Server 2016 → 클라우드 통합, gMSA 도입 (Kerberoasting 완화)</li>
-<li>Azure AD Connect → Office 365와의 클라우드 연동</li>
-</ol>
-</blockquote>
-<p><img src="https://i.imgur.com/5FEb3fF.png" alt="" /></p>
-<p>Active Directory는 <strong>LDAP(1971)</strong> 과 <strong>X.500 표준</strong>을 기반으로 설계되었으며, 2000년 <strong>Windows Server 2000</strong>과 함께 처음 도입되었습니다.</p>
-<p>이후 발전 과정에서 <strong>Windows Server 2003</strong>에서는 Forest 기능이 추가되어 대규모 조직 관리가 가능해졌고, <strong>Windows Server 2008</strong>에서는 <strong>ADFS</strong>가 도입되어 Single Sign-On(SSO) 환경을 지원하게 되었습니다.</p>
-<p><strong>Windows Server 2016</strong>에서는 클라우드 통합이 본격화되면서 <strong>gMSA(Group Managed Service Account)</strong> 기능이 도입되어 Kerberoasting 공격에 대한 대응책을 제공했습니다. 최근에는 <strong>Azure AD Connect</strong>를 통해 Office 365와 같은 클라우드 서비스와 긴밀히 연동할 수 있게 되어, 온프레미스와 클라우드를 아우르는 관리 체계로 발전해왔습니다.</p>
+      <h1>1. IAM(Identity and Access Management) 개요</h1>
+<p><strong>IAM</strong>은 AWS 리소스에 대한 <strong>인증(Authentication)</strong> 과 <strong>인가(Authorization)</strong> 를 중앙에서 제어하는 핵심 보안 서비스입니다.</p>
+<p>IAM을 통해 사용자는 다음과 같은 방식으로 AWS 자원 접근을 안전하게 관리할 수 있습니다.</p>
+<ul>
+<li><strong>사용자(User)</strong>, <strong>그룹(Group)</strong>, <strong>역할(Role)</strong>, <strong>정책(Policy)</strong> 을 통해 접근 제어 구조를 정의</li>
+<li><strong>IAM 정책(Policy)</strong> 을 JSON 형태로 작성하여, 허용(<code>Allow</code>) 또는 거부(<code>Deny</code>) 권한을 세밀하게 지정</li>
+<li><strong>MFA(Multi-Factor Authentication)</strong> 설정으로 추가 인증 단계 제공</li>
+<li><strong>Access Key, Password, Role 기반 인증</strong> 지원으로 다양한 환경(콘솔, CLI, SDK)에서 인증 가능</li>
+<li>조직 내 보안 준수
+<ul>
+<li>Root 계정 사용 최소화</li>
+<li>IAM Role을 통한 EC2 등 서비스 간 안전한 권한 위임</li>
+<li>정기적인 자격 증명 검토 및 폐기</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h1>2. IAM Security Tools</h1>
+<h2>2-1. IAM Credentials Report</h2>
+<ul>
+<li><strong>보고서 수준:</strong> 계정 단위(Account-level)</li>
+<li><strong>기능:</strong> 모든 IAM 사용자에 대한 <strong>인증 정보 상태를 요약한 보고서</strong>를 생성</li>
+<li><strong>포함 내용:</strong>
+<ul>
+<li>비밀번호 사용 여부 및 마지막 변경 시점</li>
+<li>액세스 키(Access Key) 활성 여부 및 마지막 사용 일자</li>
+<li>MFA 등록 여부 등</li>
+</ul>
+</li>
+<li><strong>활용 목적:</strong>
+<ul>
+<li>장기간 미사용 계정, 비활성 키, MFA 미등록 사용자 식별</li>
+<li>계정 보안 준수 상태 점검 및 감사(Compliance) 보고용</li>
+</ul>
+</li>
+</ul>
+<h2>2-2. IAM Access Advisor</h2>
+<ul>
+<li><strong>보고서 수준:</strong> 사용자 단위(User-level)</li>
+<li><strong>기능:</strong> 사용자가 <strong>어떤 서비스에 접근할 수 있는지와 마지막 접근 시점</strong>을 표시</li>
+<li><strong>활용 목적:</strong>
+<ul>
+<li>오랫동안 사용되지 않은 서비스 권한 식별</li>
+<li><strong>최소 권한 원칙(Least Privilege)</strong> 실현을 위한 권한 축소 기반 자료로 활용</li>
+</ul>
+</li>
+</ul>
 
     </div>
 
 
     <div class="post__navigation">
       
-      
-      <a class="next" href="/2025/09/17/d1-01-amazon-guardduty/">
-        <img class="post__nav-image lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-01. Amazon GuardDuty">
+      <a class="prev" href="/2025/10/06/d1-07-aws-abuse-report/">
+        <img class="post__nav-image lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-07. AWS Abuse Report">
         <div class="post__nav-box">
-          <div class="post__nav post__nav__next">Siguiente Publicación <i class="ion ion-md-arrow-forward"></i></div>
-          <h4 class="post__nav__title">D1-01. Amazon GuardDuty</h4>
+          <div class="post__nav post__nav__prev"><i class="ion ion-md-arrow-round-back"></i> Previous Post</div>
+          <h4 class="post__nav__title">D1-07. AWS Abuse Report</h4>
         </div>
       </a>
+      
       
     </div>
 
@@ -1043,7 +1054,7 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
 
 
 <div class="container">
-  <div class="related-posts ">
+  <div class="related-posts is-related">
     <div class="row">
       <div class="col col-12">
         <div class="container__inner">
@@ -1064,6 +1075,68 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
             
 
             
+
+            <div class="article col col-4 col-d-6 col-t-12 grid__post">
+              <div class="article__inner">
+
+                
+                <a class="article__image" href="/2025/10/06/d1-07-aws-abuse-report/">
+                  <img class="lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-07. AWS Abuse Report">
+                </a>
+                
+
+                <div class="article__content">
+
+                  <div class="article__meta">
+                    <span class="article__minutes">
+                      
+                      
+                        1 min read
+                      
+                      <time class="article__date"
+                        datetime="2025-10-06T16:37:00+00:00">Oct 6, 2025</time>
+                    </span>
+                  </div>
+
+                  <h2 class="article__title">D1-07. AWS Abuse Report</h2>
+
+                  <p class="article__excerpt">AWS Abuse Report는 AWS 리소스의 악용을 신고하거나, 악용 의심 통보를 받을 때 대응하는 절차입니다.  AWS Trust & Safety 팀이 이를 관리하며, 신고자는 악용 사례를 보고하고, 수신자는 24시간 이내에 대응해야 합니다.</p>
+
+                  <div class="article__bottom">
+
+                    
+                    <div class="article__author">
+                      <a href="/about/" aria-label="LRTK"><img class="article__author-image lazy" data-src="/images/pages/avatar.jpeg" alt="LRTK's Picture"></a>
+                    </div>
+                    
+
+                    <div class="article__bottom-meta">
+                      
+                        <a href="/about/" class="article__author-link">LRTK</a>
+                      
+                      
+                      <span>in</span>
+                      <span class="article-tags">
+                        
+                          <a href="/tag/cloud" class="article__tag">Cloud</a>
+                        
+                          <a href="/tag/aws" class="article__tag">AWS</a>
+                        
+                          <a href="/tag/aws-security" class="article__tag">AWS Security</a>
+                        
+                      </span>
+                      
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+            
+                
+              
             
             
             
@@ -1071,6 +1144,68 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
             
 
             
+
+            <div class="article col col-4 col-d-6 col-t-12 grid__post">
+              <div class="article__inner">
+
+                
+                <a class="article__image" href="/2025/10/04/d1-06-ec2-%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4-%EC%A0%91%EA%B7%BC-%ED%82%A4-%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EB%B3%B5%EA%B5%AC-%EB%B0%A9%EB%B2%95/">
+                  <img class="lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-06. EC2 인스턴스 접근 키, 비밀번호 복구 방법">
+                </a>
+                
+
+                <div class="article__content">
+
+                  <div class="article__meta">
+                    <span class="article__minutes">
+                      
+                      
+                        3 min read
+                      
+                      <time class="article__date"
+                        datetime="2025-10-04T17:16:00+00:00">Oct 4, 2025</time>
+                    </span>
+                  </div>
+
+                  <h2 class="article__title">D1-06. EC2 인스턴스 접근 키, 비밀번호 복구 방법</h2>
+
+                  <p class="article__excerpt">AWS EC2 인스턴스를 운영하다 보면, SSH 키나 Windows 관리자 비밀번호를 분실해 더 이상 접속할 수 없는 상황이 발생할 수 있습니다. 특히 프로덕션 환경에서 이러한 문제가 생기면 서비스 중단으로 이어질 수 있기 때문에, 빠르고 안전한 복구 방법을 아는 것이 매우 중요합니다. 이 글에서는 Linux와 Windows EC2 인스턴스에서 접근 권한을 복구하는 다양한 방법을 정리했습니다.</p>
+
+                  <div class="article__bottom">
+
+                    
+                    <div class="article__author">
+                      <a href="/about/" aria-label="LRTK"><img class="article__author-image lazy" data-src="/images/pages/avatar.jpeg" alt="LRTK's Picture"></a>
+                    </div>
+                    
+
+                    <div class="article__bottom-meta">
+                      
+                        <a href="/about/" class="article__author-link">LRTK</a>
+                      
+                      
+                      <span>in</span>
+                      <span class="article-tags">
+                        
+                          <a href="/tag/cloud" class="article__tag">Cloud</a>
+                        
+                          <a href="/tag/aws" class="article__tag">AWS</a>
+                        
+                          <a href="/tag/aws-security" class="article__tag">AWS Security</a>
+                        
+                      </span>
+                      
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+            
+                
+              
             
             
             
@@ -1078,14 +1213,68 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
             
 
             
-            
-            
-            
+
+            <div class="article col col-4 col-d-6 col-t-12 grid__post">
+              <div class="article__inner">
+
+                
+                <a class="article__image" href="/2025/10/03/d1-05-ec2rescue-tool/">
+                  <img class="lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-05. EC2Rescue Tool">
+                </a>
+                
+
+                <div class="article__content">
+
+                  <div class="article__meta">
+                    <span class="article__minutes">
+                      
+                      
+                        1 min read
+                      
+                      <time class="article__date"
+                        datetime="2025-10-03T14:18:00+00:00">Oct 3, 2025</time>
+                    </span>
+                  </div>
+
+                  <h2 class="article__title">D1-05. EC2Rescue Tool</h2>
+
+                  <p class="article__excerpt">EC2Rescue는 EC2 인스턴스의 부팅·접근·네트워크 문제를 자동으로 진단하고 복구하는 도구입니다. AWS Systems Manager(SSM)을 통해 원격 실행할 수 있으며, Linux와 Windows 환경을 모두 지원합니다. 또한 생성된 결과는 AWS Support 또는 S3 버킷으로 전송 가능합니다.</p>
+
+                  <div class="article__bottom">
+
+                    
+                    <div class="article__author">
+                      <a href="/about/" aria-label="LRTK"><img class="article__author-image lazy" data-src="/images/pages/avatar.jpeg" alt="LRTK's Picture"></a>
+                    </div>
+                    
+
+                    <div class="article__bottom-meta">
+                      
+                        <a href="/about/" class="article__author-link">LRTK</a>
+                      
+                      
+                      <span>in</span>
+                      <span class="article-tags">
+                        
+                          <a href="/tag/cloud" class="article__tag">Cloud</a>
+                        
+                          <a href="/tag/aws" class="article__tag">AWS</a>
+                        
+                          <a href="/tag/aws-security" class="article__tag">AWS Security</a>
+                        
+                      </span>
+                      
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
 
             
-
-            
-            
+                
+                  
           </div>
         </div>
       </div>
@@ -1113,20 +1302,20 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
     
     <div class="recent-posts">
       
-      <a class="recent-posts__image" href="/2025/09/29/d1-04-aws-ec2-instant/"><img class="lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-04. AWS EC2 Instant"></a>
+      <a class="recent-posts__image" href="/2025/10/07/d1-08-iam-security-tools/"><img class="lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-08. IAM Security Tools"></a>
       
       <div class="recent-posts__content">
         <div class="article__meta">
           <span class="article__minutes">
             
             
-              3 min read
+              1 min read
             
           </span>
           <time class="article__date"
-            datetime="2025-09-29T01:47:00+09:00">Sep 29, 2025</time>
+            datetime="2025-10-07T15:24:00+00:00">Oct 7, 2025</time>
         </div>
-        <h4 class="recent-posts__title"><a href="/2025/09/29/d1-04-aws-ec2-instant/">D1-04. AWS EC2 Instant</a></h4>
+        <h4 class="recent-posts__title"><a href="/2025/10/07/d1-08-iam-security-tools/">D1-08. IAM Security Tools</a></h4>
         <div class="article__bottom">
           <div class="article__author">
             <a href="/about/" aria-label="LRTK"><img class="article__author-image lazy" data-src="/images/pages/avatar.jpeg" alt="LRTK's Picture"></a>
@@ -1140,7 +1329,7 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
     
     <div class="recent-posts">
       
-      <a class="recent-posts__image" href="/2025/09/25/d1-03-amazon-detective/"><img class="lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-03. Amazon Detective"></a>
+      <a class="recent-posts__image" href="/2025/10/06/d1-07-aws-abuse-report/"><img class="lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-07. AWS Abuse Report"></a>
       
       <div class="recent-posts__content">
         <div class="article__meta">
@@ -1151,9 +1340,9 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
             
           </span>
           <time class="article__date"
-            datetime="2025-09-25T00:31:00+09:00">Sep 25, 2025</time>
+            datetime="2025-10-06T16:37:00+00:00">Oct 6, 2025</time>
         </div>
-        <h4 class="recent-posts__title"><a href="/2025/09/25/d1-03-amazon-detective/">D1-03. Amazon Detective</a></h4>
+        <h4 class="recent-posts__title"><a href="/2025/10/06/d1-07-aws-abuse-report/">D1-07. AWS Abuse Report</a></h4>
         <div class="article__bottom">
           <div class="article__author">
             <a href="/about/" aria-label="LRTK"><img class="article__author-image lazy" data-src="/images/pages/avatar.jpeg" alt="LRTK's Picture"></a>
