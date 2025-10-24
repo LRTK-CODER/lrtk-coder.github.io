@@ -7,12 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="no-referrer">
 
-  <title>D1-08. IAM Security Tools</title>
+  <title>D1-08. IAM</title>
   <meta name='description' content='IAM(Identity and Access Management) 은 AWS 리소스 접근을 인증·인가하는 핵심 서비스로,사용자·그룹·역할·정책을 통해 권한을 제어하고 MFA, Access Key, Role 기반 인증을 지원합니다.'>
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="article">
-  <meta property="og:title" content="D1-08. IAM Security Tools">
+  <meta property="og:title" content="D1-08. IAM">
   <meta property="og:description" content="IAM(Identity and Access Management) 은 AWS 리소스 접근을 인증·인가하는 핵심 서비스로,사용자·그룹·역할·정책을 통해 권한을 제어하고 MFA, Access Key, Role 기반 인증을 지원합니다.">
   <meta property="og:url" content="/2025/10/07/d1-08-iam-security-tools/">
   <meta property="og:site_name" content="LRTK">
@@ -27,7 +27,7 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="D1-08. IAM Security Tools">
+  <meta name="twitter:title" content="D1-08. IAM">
   <meta name="twitter:description" content="IAM(Identity and Access Management) 은 AWS 리소스 접근을 인증·인가하는 핵심 서비스로,사용자·그룹·역할·정책을 통해 권한을 제어하고 MFA, Access Key, Role 기반 인증을 지원합니다.">
   <meta name="twitter:image" content="/images/posts/cloudburst_mac.png">
   <meta name="twitter:site" content="@">
@@ -69,7 +69,7 @@
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   
-  "headline": "D1-08. IAM Security Tools",
+  "headline": "D1-08. IAM",
   "description": "IAM(Identity and Access Management) 은 AWS 리소스 접근을 인증·인가하는 핵심 서비스로,사용자·그룹·역할·정책을 통해 권한을 제어하고 MFA, Access Key, Role 기반 인증을 지원합니다.",
   "image": "/images/posts/cloudburst_mac.png",
   "datePublished": "2025-10-07T15:24:00+00:00",
@@ -123,7 +123,7 @@
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "D1-08. IAM Security Tools",
+      "name": "D1-08. IAM",
       "item": "/2025/10/07/d1-08-iam-security-tools/"
     }
   ]
@@ -923,7 +923,7 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
       
       <div class="col col-4 col-t-12">
         <div class="image-box">
-          <img class="post-image lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-08. IAM Security Tools">
+          <img class="post-image lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-08. IAM">
         </div>
       </div>
       
@@ -935,14 +935,14 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
             <span class="post__minutes">
               
               
-                1 min read
+                2 min read
               
               <time class="post__date"
                 datetime="2025-10-07T15:24:00+00:00">Oct 7, 2025</time>
             </span>
           </div>
         
-          <h2 class="post__title">D1-08. IAM Security Tools</h2>
+          <h2 class="post__title">D1-08. IAM</h2>
         
           <div class="post__bottom">
         
@@ -979,7 +979,7 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
   <article class="post animate">
 
     <div class="post__content">
-      <h1>1. IAM(Identity and Access Management) 개요</h1>
+      <h1>1. IAM(Identity and Access Management)</h1>
 <p><strong>IAM</strong>은 AWS 리소스에 대한 <strong>인증(Authentication)</strong> 과 <strong>인가(Authorization)</strong> 를 중앙에서 제어하는 핵심 보안 서비스입니다.</p>
 <p>IAM을 통해 사용자는 다음과 같은 방식으로 AWS 자원 접근을 안전하게 관리할 수 있습니다.</p>
 <ul>
@@ -1017,7 +1017,7 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
 </ul>
 <h2>2-2. IAM Access Advisor</h2>
 <ul>
-<li><strong>보고서 수준:</strong> 사용자 단위(User-level)</li>
+<li><strong>보고서 수준:</strong> 자격 증명 단위(Principal-level)</li>
 <li><strong>기능:</strong> 사용자가 <strong>어떤 서비스에 접근할 수 있는지와 마지막 접근 시점</strong>을 표시</li>
 <li><strong>활용 목적:</strong>
 <ul>
@@ -1026,6 +1026,28 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
 </ul>
 </li>
 </ul>
+<hr />
+<h1>3. IAM Access Analyzer</h1>
+<p>IAM Access Analyzer는 AWS IAM 콘솔 내의 서비스로, 리소스가 <strong>외부 엔티티와 공유되고 있는지 식별</strong>하여 보안 위험을 찾는 데 사용됩니다.</p>
+<h2>3-1. 외부 접근 분석</h2>
+<p>S3 버킷, IAM 역할, KMS 키, Lambda, SQS, Secrets Manager 등의 리소스가 의도치 않게 외부와 공유되어 데이터가 노출되는 보안 위험을 방지합니다.</p>
+<h3>동작 방식</h3>
+<ol>
+<li>Zone of Trust 정의: 사용자가 자신의 AWS 계정 또는 AWS 조직을 신뢰 영역으로 설정함.</li>
+<li>Finding 보고: 신뢰 영역 외부의 주체(타 AWS 계정, 외부 IP)가 내 리소스에 접근할 수 있도록 허용된 경우, 이를 Finding로 탐지하여 보고함.</li>
+<li>조치: 사용자는 Finding를 검토하고 불필요한 공유일 경우, 보안 조치를 취할 수 있음.</li>
+</ol>
+<h2>3-2. 정책 검증 (Policy Validation)</h2>
+<p>IAM 정책을 생성하거나 수정할 때, 해당 정책이 <strong>AWS 정책 문법과 모범 사례(Best Practice)</strong> 에 맞는지 검증합니다.<br />
+정책의 일반 경고, 보안 경고, 오류, 제안 사항을 알려주며, 정책을 개선할 수 있는 <strong>실행 가능한 권장 사항</strong>을 제공합니다.</p>
+<h2>3-3. 정책 생성 (Policy Generation)</h2>
+<p>실제 액세스 활동(API 호출) 기반으로 애플리케이션에 필요한 최소한의 권한을 가진 IAM 정책을 자동으로 생성해줌.</p>
+<h3>동작 방식</h3>
+<ol>
+<li>CloudTrail 로그 분석: Lambda 함수와 같은 애플리케이션이 수행한 API 호출이 CloudTrail 로그에 기록됨.</li>
+<li>정책 생성: Access Analyzer가 최대 90일간의 CloudTrail 로그를 검토함.</li>
+<li>최소 권한 적용: 실제로 사용된 API 호출만을 허용하는 세분화된 IAM 정책을 생성하여, 보안 모범 사례(최소 권한 원칙)를 쉽게 달성하도록 도와줌.</li>
+</ol>
 
     </div>
 
@@ -1040,6 +1062,14 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
         </div>
       </a>
       
+      
+      <a class="next" href="/2025/10/21/d2-01-amazon-inspector/">
+        <img class="post__nav-image lazy" data-src="/images/posts/cloudburst_mac.png" alt="D2-01. Amazon Inspector">
+        <div class="post__nav-box">
+          <div class="post__nav post__nav__next">Next Post <i class="ion ion-md-arrow-forward"></i></div>
+          <h4 class="post__nav__title">D2-01. Amazon Inspector</h4>
+        </div>
+      </a>
       
     </div>
 
@@ -1062,6 +1092,20 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
           <div class="row grid">
 
           
+            
+            
+
+            
+
+            
+            
+            
+            
+
+            
+
+            
+            
             
             
 
@@ -1302,7 +1346,7 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
     
     <div class="recent-posts">
       
-      <a class="recent-posts__image" href="/2025/10/07/d1-08-iam-security-tools/"><img class="lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-08. IAM Security Tools"></a>
+      <a class="recent-posts__image" href="/2025/10/22/d2-02-aws%EC%9D%98-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EA%B7%9C%EC%A0%95-%EC%A4%80%EC%88%98%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%A1%9C%EA%B9%85/"><img class="lazy" data-src="/images/posts/cloudburst_mac.png" alt="D2-02. AWS의 보안 및 규정 준수를 위한 로깅"></a>
       
       <div class="recent-posts__content">
         <div class="article__meta">
@@ -1313,9 +1357,9 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
             
           </span>
           <time class="article__date"
-            datetime="2025-10-07T15:24:00+00:00">Oct 7, 2025</time>
+            datetime="2025-10-22T12:30:00+00:00">Oct 22, 2025</time>
         </div>
-        <h4 class="recent-posts__title"><a href="/2025/10/07/d1-08-iam-security-tools/">D1-08. IAM Security Tools</a></h4>
+        <h4 class="recent-posts__title"><a href="/2025/10/22/d2-02-aws%EC%9D%98-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EA%B7%9C%EC%A0%95-%EC%A4%80%EC%88%98%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%A1%9C%EA%B9%85/">D2-02. AWS의 보안 및 규정 준수를 위한 로깅</a></h4>
         <div class="article__bottom">
           <div class="article__author">
             <a href="/about/" aria-label="LRTK"><img class="article__author-image lazy" data-src="/images/pages/avatar.jpeg" alt="LRTK's Picture"></a>
@@ -1329,7 +1373,7 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
     
     <div class="recent-posts">
       
-      <a class="recent-posts__image" href="/2025/10/06/d1-07-aws-abuse-report/"><img class="lazy" data-src="/images/posts/cloudburst_mac.png" alt="D1-07. AWS Abuse Report"></a>
+      <a class="recent-posts__image" href="/2025/10/21/d2-01-amazon-inspector/"><img class="lazy" data-src="/images/posts/cloudburst_mac.png" alt="D2-01. Amazon Inspector"></a>
       
       <div class="recent-posts__content">
         <div class="article__meta">
@@ -1340,9 +1384,9 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
             
           </span>
           <time class="article__date"
-            datetime="2025-10-06T16:37:00+00:00">Oct 6, 2025</time>
+            datetime="2025-10-21T14:33:00+00:00">Oct 21, 2025</time>
         </div>
-        <h4 class="recent-posts__title"><a href="/2025/10/06/d1-07-aws-abuse-report/">D1-07. AWS Abuse Report</a></h4>
+        <h4 class="recent-posts__title"><a href="/2025/10/21/d2-01-amazon-inspector/">D2-01. Amazon Inspector</a></h4>
         <div class="article__bottom">
           <div class="article__author">
             <a href="/about/" aria-label="LRTK"><img class="article__author-image lazy" data-src="/images/pages/avatar.jpeg" alt="LRTK's Picture"></a>
@@ -1365,7 +1409,7 @@ function toggleMobileSubmenu(submenuIndex, parentIndex) {
       <h3 class="widget__title">Explore Tags</h3>
     </div>
     <div class="tag__cloud">
-      <a href="/tag/aws/" class="set-5">AWS</a> <a href="/tag/aws-security/" class="set-5">AWS Security</a> <a href="/tag/active-directory/" class="set-1">Active Directory</a> <a href="/tag/active-directory-fundamentals/" class="set-1">Active Directory Fundamentals</a> <a href="/tag/cloud/" class="set-5">Cloud</a>
+      <a href="/tag/aws/" class="set-5">AWS</a> <a href="/tag/aws-security/" class="set-5">AWS Security</a> <a href="/tag/active-directory/" class="set-1">Active Directory</a> <a href="/tag/active-directory-fundamentals/" class="set-1">Active Directory Fundamentals</a> <a href="/tag/cloud/" class="set-5">Cloud</a> <a href="/tag/ec2/" class="set-1">EC2</a> <a href="/tag/ecr/" class="set-1">ECR</a> <a href="/tag/inspector/" class="set-1">Inspector</a> <a href="/tag/lambda/" class="set-1">Lambda</a> <a href="/tag/technology/" class="set-1">Technology</a>
     </div>
   </div>
 </div>
